@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4aa6a487-0c26-47b0-bf6e-73f5e08d0429" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/virulence.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,12 +49,23 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1582961220159</updated>
-      <workItem from="1582961222317" duration="223000" />
+      <workItem from="1582961222317" duration="381000" />
     </task>
+    <task id="LOCAL−00001" summary="First version">
+      <created>1582961485248</created>
+      <option name="number" value="LOCAL−00001" />
+      <option name="presentableId" value="LOCAL−00001" />
+      <updated>1582961485248</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="First version" />
+    <option name="LAST_COMMIT_MESSAGE" value="First version" />
   </component>
   <component name="WindowStateProjectService">
     <state x="451" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582961444610">
@@ -68,6 +76,10 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="725" y="338" width="525" height="428" key="#com.intellij.ide.util.TreeClassChooserDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1582961384524" />
+    <state x="556" y="94" width="865" height="917" key="CommitChangelistDialog2" timestamp="1582961485140">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="556" y="94" width="865" height="917" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1582961485140" />
     <state x="615" y="296" width="735" height="513" key="FileChooserDialogImpl" timestamp="1582961301116">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -76,5 +88,9 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="476" y="130" width="1024" height="845" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1582961249722" />
+    <state x="588" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1582961501618">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="588" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2/67.27.1853.1053@67.27.1853.1053" timestamp="1582961501618" />
   </component>
 </project>
