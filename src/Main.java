@@ -11,9 +11,10 @@ import org.newdawn.slick.SlickException;
 import java.util.Random;
 
 public class Main extends BasicGame {
-    public static final int SQUARE_SIZE = 5;
+    public static final int SQUARES_ACROSS = 200;
     public static final int HELP_COUNT = 1000;
     public static final int HELP_RADIUS = 20;
+    private static int squareSize;
     private Color[][] grid;
     private Random random = new Random();
 
@@ -23,6 +24,7 @@ public class Main extends BasicGame {
 
     public static void main(String[] args) throws SlickException, LWJGLException {
         final DisplayMode mode = getDisplayMode();
+        squareSize = mode.getWidth() / SQUARES_ACROSS;
         AppGameContainer container = new AppGameContainer(new Main(), mode.getWidth(), mode.getHeight(), true);
         container.setShowFPS(false);
         container.start();
@@ -47,7 +49,7 @@ public class Main extends BasicGame {
             final DisplayMode mode = getDisplayMode();
             final int width = mode.getWidth();
             final int height = mode.getHeight();
-            grid = new Color[height / SQUARE_SIZE + 1][width / SQUARE_SIZE + 1];
+            grid = new Color[height / squareSize + 1][width / squareSize + 1];
         } catch (LWJGLException e) {
             e.printStackTrace();
         }
@@ -81,15 +83,15 @@ public class Main extends BasicGame {
                 final Color color = grid[y][x];
                 if (color != null) {
                     g.setColor(color);
-                    g.fillRect(x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+                    g.fillRect(x * squareSize, y * squareSize, squareSize, squareSize);
                 }
             }
     }
 
     @Override
     public void mousePressed(int button, int x, int y) {
-        final int row = y / SQUARE_SIZE;
-        final int column = x / SQUARE_SIZE;
+        final int row = y / squareSize;
+        final int column = x / squareSize;
         final Color color = grid[row][column];
         if (color == null)
             return;
