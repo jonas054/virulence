@@ -51,14 +51,14 @@ public class Main extends BasicGame {
     }
 
     @Override
-    public void init(GameContainer gameContainer) {
+    public void init(GameContainer gameContainer) throws SlickException {
         try {
             final DisplayMode mode = getDisplayMode();
             final int width = mode.getWidth();
             final int height = mode.getHeight();
             grid = new Color[height / squareSize + 1][width / squareSize + 1];
         } catch (LWJGLException e) {
-            e.printStackTrace();
+            throw new SlickException(e.getMessage(), e);
         }
         pen_x = grid[0].length / 2.0;
         pen_y = grid.length / 2.0;
