@@ -15,7 +15,7 @@ public class Main extends BasicGame {
     public static final int SQUARES_ACROSS = 300;
     public static final int HELP_COUNT = 1000;
     public static final int HELP_RADIUS = SQUARES_ACROSS / 10;
-    public static final double PEN_SPEED = 0.4;
+    public static final double PEN_SPEED = SQUARES_ACROSS / 600.0;
     private static int squareSize;
     private Color[][] grid;
     private Random random = new Random();
