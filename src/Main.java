@@ -24,7 +24,7 @@ public class Main extends BasicGame {
     private double pen_y_direction;
 
     public Main() {
-        super("Virus");
+        super("Virulence");
     }
 
     public static void main(String[] args) throws SlickException, LWJGLException {
