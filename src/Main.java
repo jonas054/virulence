@@ -6,17 +6,22 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import java.util.Random;
 
 public class Main extends BasicGame {
-    public static final int SQUARES_ACROSS = 200;
+    public static final int SQUARES_ACROSS = 300;
     public static final int HELP_COUNT = 1000;
-    public static final int HELP_RADIUS = 20;
+    public static final int HELP_RADIUS = SQUARES_ACROSS / 10;
+    public static final double PEN_SPEED = 0.4;
     private static int squareSize;
     private Color[][] grid;
     private Random random = new Random();
+    private double pen_x, pen_y;
+    private double pen_x_direction;
+    private double pen_y_direction;
 
     public Main() {
         super("Virus");
@@ -53,6 +58,8 @@ public class Main extends BasicGame {
         } catch (LWJGLException e) {
             e.printStackTrace();
         }
+        pen_x = grid[0].length / 2.0;
+        pen_y = grid.length / 2.0;
         Color[] colors = {Color.blue, Color.green.darker(), Color.orange, Color.magenta, Color.red, Color.cyan};
         for (int i = 0; i < colors.length; ++i)
             grid[random.nextInt(grid.length)][random.nextInt(grid[0].length)] = colors[i % colors.length];
@@ -60,15 +67,31 @@ public class Main extends BasicGame {
 
     @Override
     public void update(GameContainer gameContainer, int seconds) {
+        pen_x += pen_x_direction;
+        pen_y += pen_y_direction;
+        int pen_column = (int) Math.round(pen_x);
+        int pen_row = (int) Math.round(pen_y);
+        if (pen_column >= grid[0].length)
+            pen_column = grid[0].length - 1;
+        if (pen_column < 0)
+            pen_column = 0;
+        if (pen_row >= grid.length)
+            pen_row = grid.length - 1;
+        if (pen_row < 0)
+            pen_row = 0;
+        grid[pen_row][pen_column] = Color.white;
+
         final int max = grid.length * grid[0].length * 2;
         for (int i = 0; i < max; i++) {
             int x = random.nextInt(grid[0].length);
             int y = random.nextInt(grid.length);
             int other_x = x + random.nextInt(3) - 1;
             int other_y = y + random.nextInt(3) - 1;
-            if (other_x != x || other_y != y)
-                if (isInsideGrid(other_x, other_y) && grid[other_y][other_x] != null)
-                    grid[y][x] = grid[other_y][other_x];
+            if ((other_x != x || other_y != y) && isInsideGrid(other_x, other_y)) {
+                final Color other = grid[other_y][other_x];
+                if (other != null && other != Color.white && grid[y][x] != Color.white)
+                    grid[y][x] = other;
+            }
         }
     }
 
@@ -86,6 +109,9 @@ public class Main extends BasicGame {
                     g.fillRect(x * squareSize, y * squareSize, squareSize, squareSize);
                 }
             }
+        float brightness = random.nextFloat();
+        g.setColor(new Color(brightness, brightness, brightness));
+        g.fillRect(Math.round(pen_x) * squareSize, Math.round(pen_y) * squareSize, squareSize, squareSize);
     }
 
     @Override
@@ -103,7 +129,30 @@ public class Main extends BasicGame {
             int other_column = column + random.nextInt(HELP_RADIUS) - HELP_RADIUS / 2;
             if (other_column < 0 || other_column >= grid[0].length)
                 continue;
-            grid[other_row][other_column] = button == 0 ? color.darker() : color.brighter();
+            grid[other_row][other_column] = (button == Input.MOUSE_LEFT_BUTTON) ? color.darker() : color.brighter();
         }
+    }
+
+    @Override
+    public void keyPressed(int key, char c) {
+        switch (key) {
+            case Input.KEY_DOWN:
+                pen_y_direction = PEN_SPEED;
+                break;
+            case Input.KEY_UP:
+                pen_y_direction = -PEN_SPEED;
+                break;
+            case Input.KEY_LEFT:
+                pen_x_direction = -PEN_SPEED;
+                break;
+            case Input.KEY_RIGHT:
+                pen_x_direction = PEN_SPEED;
+                break;
+        }
+    }
+
+    @Override
+    public void keyReleased(int key, char c) {
+        pen_x_direction = pen_y_direction = 0;
     }
 }
