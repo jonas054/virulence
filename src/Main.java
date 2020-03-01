@@ -29,8 +29,10 @@ public class Main extends BasicGame {
 
     public static void main(String[] args) throws SlickException, LWJGLException {
         final DisplayMode mode = getDisplayMode();
-        squareSize = mode.getWidth() / SQUARES_ACROSS;
-        AppGameContainer container = new AppGameContainer(new Main(), mode.getWidth(), mode.getHeight(), true);
+        final int width = mode.getWidth() * 9 / 10;
+        squareSize = width / SQUARES_ACROSS;
+        AppGameContainer container =
+                new AppGameContainer(new Main(), width, mode.getHeight() * 9 / 10, false);
         container.setShowFPS(false);
         container.start();
     }
