@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="virulence:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="4aa6a487-0c26-47b0-bf6e-73f5e08d0429" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/google-java-format.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/liblwjgl.dylib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/liblwjgl.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/virulence_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -25,6 +28,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="GO_FMT" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -32,9 +36,13 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -75,7 +83,10 @@
       <option name="presentableId" value="Default" />
       <updated>1582961220159</updated>
       <workItem from="1582961222317" duration="381000" />
-      <workItem from="1582963156203" duration="1220000" />
+      <workItem from="1582963156203" duration="1949000" />
+      <workItem from="1583102680023" duration="213000" />
+      <workItem from="1583125383220" duration="1660000" />
+      <workItem from="1583139183976" duration="63000" />
     </task>
     <task id="LOCAL−00001" summary="First version">
       <created>1582961485248</created>
@@ -83,11 +94,11 @@
       <option name="presentableId" value="LOCAL−00001" />
       <updated>1582961485248</updated>
     </task>
-    <task id="LOCAL−00002" summary="Add Slick2d and LWJGL jar files">
-      <created>1582961649435</created>
+    <task id="LOCAL−00002" summary="Make it work on MacOS">
+      <created>1582964754551</created>
       <option name="number" value="LOCAL−00002" />
       <option name="presentableId" value="LOCAL−00002" />
-      <updated>1582961649435</updated>
+      <updated>1582964754551</updated>
     </task>
     <option name="localTasksCounter" value="3" />
     <servers />
@@ -100,7 +111,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -108,8 +121,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First version" />
-    <MESSAGE value="Add Slick2d and LWJGL jar files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Slick2d and LWJGL jar files" />
+    <MESSAGE value="Make it work on MacOS" />
+    <option name="LAST_COMMIT_MESSAGE" value="Make it work on MacOS" />
   </component>
   <component name="WindowStateProjectService">
     <state x="451" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582961444610">
