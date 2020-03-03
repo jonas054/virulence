@@ -16,6 +16,7 @@ public class Main extends BasicGame {
     public static final int HELP_COUNT = 1000;
     public static final int HELP_RADIUS = SQUARES_ACROSS / 30;
     public static final double PEN_SPEED = SQUARES_ACROSS / 600.0;
+    public static final int CAGE_SIZE = SQUARES_ACROSS / 15;
     private static int squareSize;
     private Color[][] grid;
     private Random random = new Random();
@@ -129,7 +130,36 @@ public class Main extends BasicGame {
             int other_column = column + random.nextInt(HELP_RADIUS) - HELP_RADIUS / 2;
             if (other_column < 0 || other_column >= grid[0].length)
                 continue;
-            grid[other_row][other_column] = (button == Input.MOUSE_LEFT_BUTTON) ? color.darker() : color.brighter();
+            if (button == Input.MOUSE_LEFT_BUTTON) {
+                grid[other_row][other_column] = color.darker();
+            } else {
+                final int x1 = column - CAGE_SIZE / 2;
+                final int x2 = column + CAGE_SIZE / 2;
+                final int y1 = row - CAGE_SIZE / 2;
+                final int y2 = row + CAGE_SIZE / 2;
+                drawLine(x1, y1, x2, y1);
+                drawLine(x1, y2, x2, y2);
+                drawLine(x1, y1, x1, y2);
+                drawLine(x2, y1, x2, y2);
+            }
+        }
+    }
+
+    private void drawLine(int x1, int y1, int x2, int y2) {
+        x1 = Math.max(x1, 0);
+        x2 = Math.max(x2, 0);
+        y1 = Math.max(y1, 0);
+        y2 = Math.max(y2, 0);
+        x1 = Math.min(x1, grid[0].length - 1);
+        x2 = Math.min(x2, grid[0].length - 1);
+        y1 = Math.min(y1, grid.length - 1);
+        y2 = Math.min(y2, grid.length - 1);
+        if (y1 == y2) {
+            for (int x = x1; x <= x2; ++x)
+                grid[y1][x] = Color.white;
+        } else {
+            for (int y = y1; y <= y2; ++y)
+                grid[y][x1] = Color.white;
         }
     }
 
