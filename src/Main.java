@@ -13,8 +13,7 @@ import java.util.Random;
 
 public class Main extends BasicGame {
     public static final int SQUARES_ACROSS = 300;
-    public static final int HELP_COUNT = 1000;
-    public static final int HELP_RADIUS = SQUARES_ACROSS / 30;
+    public static final int BLAST_RADIUS = SQUARES_ACROSS / 60;
     public static final double PEN_SPEED = SQUARES_ACROSS / 600.0;
     public static final int CAGE_SIZE = SQUARES_ACROSS / 15;
     private static int squareSize;
@@ -70,16 +69,8 @@ public class Main extends BasicGame {
     public void update(GameContainer gameContainer, int seconds) {
         pen_x += pen_x_direction;
         pen_y += pen_y_direction;
-        int pen_column = (int) Math.round(pen_x);
-        int pen_row = (int) Math.round(pen_y);
-        if (pen_column >= getWidth())
-            pen_column = getWidth() - 1;
-        if (pen_column < 0)
-            pen_column = 0;
-        if (pen_row >= getHeight())
-            pen_row = getHeight() - 1;
-        if (pen_row < 0)
-            pen_row = 0;
+        int pen_column = limits((int) Math.round(pen_x), getWidth());
+        int pen_row = limits((int) Math.round(pen_y), getHeight());
         grid[pen_row][pen_column] = Color.white;
 
         final int max = getHeight() * getWidth() * 2;
@@ -96,12 +87,13 @@ public class Main extends BasicGame {
         }
     }
 
-    private boolean isInsideGrid(int x, int y) {
-        return x >= 0 && y >= 0 && x < getWidth() && y < getHeight();
-    }
-
     @Override
     public void render(GameContainer gameContainer, Graphics g) {
+        drawGrid(g);
+        makePenFlicker(g);
+    }
+
+    private void drawGrid(Graphics g) {
         for (int y = 0; y < getHeight(); y++)
             for (int x = 0; x < getWidth(); x++) {
                 final Color color = grid[y][x];
@@ -110,6 +102,9 @@ public class Main extends BasicGame {
                     g.fillRect(x * squareSize, y * squareSize, squareSize, squareSize);
                 }
             }
+    }
+
+    private void makePenFlicker(Graphics g) {
         float brightness = random.nextFloat();
         g.setColor(new Color(brightness, brightness, brightness));
         g.fillRect(Math.round(pen_x) * squareSize, Math.round(pen_y) * squareSize, squareSize, squareSize);
@@ -122,35 +117,39 @@ public class Main extends BasicGame {
         if (grid[row][column] == null)
             return;
 
-        if (button == Input.MOUSE_LEFT_BUTTON) {
+        if (button == Input.MOUSE_LEFT_BUTTON)
             blastThroughWalls(row, column);
-        } else {
+        else
             buildCage(row, column);
-        }
     }
 
     private void blastThroughWalls(int row, int column) {
-        for (int i = 0; i < HELP_COUNT; i++) {
-            int other_row = row + random.nextInt(HELP_RADIUS) - HELP_RADIUS / 2;
-            if (other_row < 0 || other_row >= getHeight())
-                continue;
-            int other_column = column + random.nextInt(HELP_RADIUS) - HELP_RADIUS / 2;
-            if (other_column < 0 || other_column >= getWidth())
-                continue;
-            if (grid[other_row][other_column] == Color.white)
-                grid[other_row][other_column] = null;
-        }
+        final int radius = BLAST_RADIUS;
+        removeWalls(
+                limits(column - radius, getWidth()),
+                limits(column + radius, getWidth()),
+                limits(row - radius, getHeight()),
+                limits(row + radius, getHeight()));
     }
 
     private void buildCage(int row, int column) {
-        int x1 = limits(column - CAGE_SIZE / 2, getWidth());
-        int x2 = limits(column + CAGE_SIZE / 2, getWidth());
-        int y1 = limits(row - CAGE_SIZE / 2, getHeight());
-        int y2 = limits(row + CAGE_SIZE / 2, getHeight());
+        final int radius = CAGE_SIZE / 2;
+        int x1 = limits(column - radius, getWidth());
+        int x2 = limits(column + radius, getWidth());
+        int y1 = limits(row - radius, getHeight());
+        int y2 = limits(row + radius, getHeight());
+        drawFourWalls(x1, x2, y1, y2);
+        removeWalls(x1, x2, y1, y2);
+    }
+
+    private void drawFourWalls(int x1, int x2, int y1, int y2) {
         drawLine(x1, y1, x2, y1);
         drawLine(x1, y2, x2, y2);
         drawLine(x1, y1, x1, y2);
         drawLine(x2, y1, x2, y2);
+    }
+
+    private void removeWalls(int x1, int x2, int y1, int y2) {
         for (int yy = y1 + 1; yy < y2; ++yy) {
             for (int xx = x1 + 1; xx < x2; ++xx) {
                 if (grid[yy][xx] == Color.white) {
@@ -166,6 +165,10 @@ public class Main extends BasicGame {
 
     private int getWidth() {
         return grid[0].length;
+    }
+
+    private boolean isInsideGrid(int x, int y) {
+        return x >= 0 && y >= 0 && x < getWidth() && y < getHeight();
     }
 
     private int limits(int a, int maximum) {
