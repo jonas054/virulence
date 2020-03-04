@@ -6,15 +6,20 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aa6a487-0c26-47b0-bf6e-73f5e08d0429" name="Default Changelist" comment="Add the feature of walls drawn with arrow keys">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="4aa6a487-0c26-47b0-bf6e-73f5e08d0429" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -46,6 +51,9 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib" />
     </key>
@@ -74,6 +82,10 @@
       <workItem from="1583102680023" duration="213000" />
       <workItem from="1583125383220" duration="1660000" />
       <workItem from="1583139183976" duration="63000" />
+      <workItem from="1583216944488" duration="992000" />
+      <workItem from="1583225897929" duration="496000" />
+      <workItem from="1583234942456" duration="487000" />
+      <workItem from="1583250771477" duration="986000" />
     </task>
     <task id="LOCAL−00001" summary="First version">
       <created>1582961485248</created>
