@@ -59,11 +59,11 @@ public class Main extends BasicGame {
         } catch (LWJGLException e) {
             throw new SlickException(e.getMessage(), e);
         }
-        pen_x = grid[0].length / 2.0;
-        pen_y = grid.length / 2.0;
+        pen_x = getWidth() / 2.0;
+        pen_y = getHeight() / 2.0;
         Color[] colors = {Color.blue, Color.green.darker(), Color.orange, Color.magenta, Color.red, Color.cyan};
         for (int i = 0; i < colors.length; ++i)
-            grid[random.nextInt(grid.length)][random.nextInt(grid[0].length)] = colors[i % colors.length];
+            grid[random.nextInt(getHeight())][random.nextInt(getWidth())] = colors[i % colors.length];
     }
 
     @Override
@@ -72,20 +72,20 @@ public class Main extends BasicGame {
         pen_y += pen_y_direction;
         int pen_column = (int) Math.round(pen_x);
         int pen_row = (int) Math.round(pen_y);
-        if (pen_column >= grid[0].length)
-            pen_column = grid[0].length - 1;
+        if (pen_column >= getWidth())
+            pen_column = getWidth() - 1;
         if (pen_column < 0)
             pen_column = 0;
-        if (pen_row >= grid.length)
-            pen_row = grid.length - 1;
+        if (pen_row >= getHeight())
+            pen_row = getHeight() - 1;
         if (pen_row < 0)
             pen_row = 0;
         grid[pen_row][pen_column] = Color.white;
 
-        final int max = grid.length * grid[0].length * 2;
+        final int max = getHeight() * getWidth() * 2;
         for (int i = 0; i < max; i++) {
-            int x = random.nextInt(grid[0].length);
-            int y = random.nextInt(grid.length);
+            int x = random.nextInt(getWidth());
+            int y = random.nextInt(getHeight());
             int other_x = x + random.nextInt(3) - 1;
             int other_y = y + random.nextInt(3) - 1;
             if ((other_x != x || other_y != y) && isInsideGrid(other_x, other_y)) {
@@ -97,13 +97,13 @@ public class Main extends BasicGame {
     }
 
     private boolean isInsideGrid(int x, int y) {
-        return x >= 0 && y >= 0 && x < grid[0].length && y < grid.length;
+        return x >= 0 && y >= 0 && x < getWidth() && y < getHeight();
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics g) {
-        for (int y = 0; y < grid.length; y++)
-            for (int x = 0; x < grid[0].length; x++) {
+        for (int y = 0; y < getHeight(); y++)
+            for (int x = 0; x < getWidth(); x++) {
                 final Color color = grid[y][x];
                 if (color != null) {
                     g.setColor(color);
@@ -119,46 +119,57 @@ public class Main extends BasicGame {
     public void mousePressed(int button, int x, int y) {
         final int row = y / squareSize;
         final int column = x / squareSize;
-        final Color color = grid[row][column];
-        if (color == null)
+        if (grid[row][column] == null)
             return;
 
         if (button == Input.MOUSE_LEFT_BUTTON) {
-            for (int i = 0; i < HELP_COUNT; i++) {
-                int other_row = row + random.nextInt(HELP_RADIUS) - HELP_RADIUS / 2;
-                if (other_row < 0 || other_row >= grid.length)
-                    continue;
-                int other_column = column + random.nextInt(HELP_RADIUS) - HELP_RADIUS / 2;
-                if (other_column < 0 || other_column >= grid[0].length)
-                    continue;
-                if (grid[other_row][other_column] == Color.white)
-                    grid[other_row][other_column] = null;
-            }
+            blastThroughWalls(row, column);
         } else {
-            int x1 = column - CAGE_SIZE / 2;
-            int x2 = column + CAGE_SIZE / 2;
-            int y1 = row - CAGE_SIZE / 2;
-            int y2 = row + CAGE_SIZE / 2;
-            x1 = Math.max(x1, 0);
-            x2 = Math.max(x2, 0);
-            y1 = Math.max(y1, 0);
-            y2 = Math.max(y2, 0);
-            x1 = Math.min(x1, grid[0].length - 1);
-            x2 = Math.min(x2, grid[0].length - 1);
-            y1 = Math.min(y1, grid.length - 1);
-            y2 = Math.min(y2, grid.length - 1);
-            drawLine(x1, y1, x2, y1);
-            drawLine(x1, y2, x2, y2);
-            drawLine(x1, y1, x1, y2);
-            drawLine(x2, y1, x2, y2);
-            for (int yy = y1 + 1; yy < y2; ++yy) {
-                for (int xx = x1 + 1; xx < x2; ++xx) {
-                    if (grid[yy][xx] == Color.white) {
-                        grid[yy][xx] = null;
-                    }
+            buildCage(row, column);
+        }
+    }
+
+    private void blastThroughWalls(int row, int column) {
+        for (int i = 0; i < HELP_COUNT; i++) {
+            int other_row = row + random.nextInt(HELP_RADIUS) - HELP_RADIUS / 2;
+            if (other_row < 0 || other_row >= getHeight())
+                continue;
+            int other_column = column + random.nextInt(HELP_RADIUS) - HELP_RADIUS / 2;
+            if (other_column < 0 || other_column >= getWidth())
+                continue;
+            if (grid[other_row][other_column] == Color.white)
+                grid[other_row][other_column] = null;
+        }
+    }
+
+    private void buildCage(int row, int column) {
+        int x1 = limits(column - CAGE_SIZE / 2, getWidth());
+        int x2 = limits(column + CAGE_SIZE / 2, getWidth());
+        int y1 = limits(row - CAGE_SIZE / 2, getHeight());
+        int y2 = limits(row + CAGE_SIZE / 2, getHeight());
+        drawLine(x1, y1, x2, y1);
+        drawLine(x1, y2, x2, y2);
+        drawLine(x1, y1, x1, y2);
+        drawLine(x2, y1, x2, y2);
+        for (int yy = y1 + 1; yy < y2; ++yy) {
+            for (int xx = x1 + 1; xx < x2; ++xx) {
+                if (grid[yy][xx] == Color.white) {
+                    grid[yy][xx] = null;
                 }
             }
         }
+    }
+
+    private int getHeight() {
+        return grid.length;
+    }
+
+    private int getWidth() {
+        return grid[0].length;
+    }
+
+    private int limits(int a, int maximum) {
+        return Math.min(Math.max(a, 0), maximum - 1);
     }
 
     private void drawLine(int x1, int y1, int x2, int y2) {
