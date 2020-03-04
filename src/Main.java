@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class Main extends BasicGame {
     public static final int SQUARES_ACROSS = 300;
-    public static final int BLAST_RADIUS = SQUARES_ACROSS / 60;
+    public static final int ERASE_RADIUS = SQUARES_ACROSS / 100;
     public static final double PEN_SPEED = SQUARES_ACROSS / 600.0;
     public static final int CAGE_SIZE = SQUARES_ACROSS / 15;
     private static int squareSize;
@@ -22,6 +22,8 @@ public class Main extends BasicGame {
     private double pen_x, pen_y;
     private double pen_x_direction;
     private double pen_y_direction;
+    private int eraser_x = -1;
+    private int eraser_y = -1;
 
     public Main() {
         super("Virulence");
@@ -102,6 +104,11 @@ public class Main extends BasicGame {
     public void render(GameContainer gameContainer, Graphics g) {
         drawGrid(g);
         makePenFlicker(g);
+        if (eraser_x != -1) {
+            final int eraserRadius = ERASE_RADIUS * squareSize;
+            g.setColor(Color.white);
+            g.fillRect(eraser_x - eraserRadius, eraser_y - eraserRadius, 2 * eraserRadius, 2 * eraserRadius);
+        }
     }
 
     private void drawGrid(Graphics g) {
@@ -125,22 +132,45 @@ public class Main extends BasicGame {
     public void mousePressed(int button, int x, int y) {
         final int row = y / squareSize;
         final int column = x / squareSize;
-        if (grid[row][column] == null)
-            return;
 
-        if (button == Input.MOUSE_LEFT_BUTTON)
-            blastThroughWalls(row, column);
-        else
+        if (button == Input.MOUSE_LEFT_BUTTON) {
+            eraser_x = x;
+            eraser_y = y;
+            erase(row, column);
+        } else {
+            eraser_x = -1;
+            eraser_y = -1;
             buildCage(row, column);
+        }
     }
 
-    private void blastThroughWalls(int row, int column) {
-        final int radius = BLAST_RADIUS;
-        removeWalls(
-                limits(column - radius, getWidth()),
-                limits(column + radius, getWidth()),
-                limits(row - radius, getHeight()),
-                limits(row + radius, getHeight()));
+    @Override
+    public void mouseDragged(int oldx, int oldy, int newx, int newy) {
+        if (eraser_x == -1)
+            return;
+
+        eraser_x = newx;
+        eraser_y = newy;
+        erase(oldy / squareSize, oldx / squareSize);
+    }
+
+    private void erase(int row, int column) {
+        final int radius = ERASE_RADIUS;
+        int x1 = limits(column - radius, getWidth());
+        int x2 = limits(column + radius, getWidth());
+        int y1 = limits(row - radius, getHeight());
+        int y2 = limits(row + radius, getHeight());
+        for (int yy = y1; yy <= y2; ++yy) {
+            for (int xx = x1; xx <= x2; ++xx) {
+                grid[yy][xx] = null;
+            }
+        }
+    }
+
+    @Override
+    public void mouseReleased(int button, int x, int y) {
+        eraser_x = -1;
+        eraser_y = -1;
     }
 
     private void buildCage(int row, int column) {
