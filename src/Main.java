@@ -35,6 +35,21 @@ public class Main extends BasicGame {
         container.start();
     }
 
+    @Override
+    public void init(GameContainer gameContainer) throws SlickException {
+        try {
+            final DisplayMode mode = getDisplayMode();
+            final int width = mode.getWidth();
+            final int height = mode.getHeight();
+            grid = new Color[height / squareSize + 1][width / squareSize + 1];
+        } catch (LWJGLException e) {
+            throw new SlickException(e.getMessage(), e);
+        }
+        pen_x = getWidth() / 2.0;
+        pen_y = getHeight() / 2.0;
+        placeInitialColoredDots();
+    }
+
     private static DisplayMode getDisplayMode() throws LWJGLException {
         final DisplayMode[] modes = Display.getAvailableDisplayModes();
         int max = 0;
@@ -48,18 +63,7 @@ public class Main extends BasicGame {
         return modes[max_index];
     }
 
-    @Override
-    public void init(GameContainer gameContainer) throws SlickException {
-        try {
-            final DisplayMode mode = getDisplayMode();
-            final int width = mode.getWidth();
-            final int height = mode.getHeight();
-            grid = new Color[height / squareSize + 1][width / squareSize + 1];
-        } catch (LWJGLException e) {
-            throw new SlickException(e.getMessage(), e);
-        }
-        pen_x = getWidth() / 2.0;
-        pen_y = getHeight() / 2.0;
+    private void placeInitialColoredDots() {
         Color[] colors = {Color.blue, Color.green.darker(), Color.orange, Color.magenta, Color.red, Color.cyan};
         for (int i = 0; i < colors.length; ++i)
             grid[random.nextInt(getHeight())][random.nextInt(getWidth())] = colors[i % colors.length];
@@ -67,13 +71,20 @@ public class Main extends BasicGame {
 
     @Override
     public void update(GameContainer gameContainer, int seconds) {
+        addPen();
+        addRandomDotsOfCopiedColors();
+    }
+
+    private void addPen() {
         pen_x += pen_x_direction;
         pen_y += pen_y_direction;
         int pen_column = limits((int) Math.round(pen_x), getWidth());
         int pen_row = limits((int) Math.round(pen_y), getHeight());
         grid[pen_row][pen_column] = Color.white;
+    }
 
-        final int max = getHeight() * getWidth() * 2;
+    private void addRandomDotsOfCopiedColors() {
+        final int max = getHeight() * getWidth();
         for (int i = 0; i < max; i++) {
             int x = random.nextInt(getWidth());
             int y = random.nextInt(getHeight());
