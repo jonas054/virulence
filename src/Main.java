@@ -12,7 +12,7 @@ import org.newdawn.slick.SlickException;
 import java.util.Random;
 
 public class Main extends BasicGame {
-    public static final int SQUARES_ACROSS = 250;
+    public static final int SQUARES_ACROSS = 300;
     public static final int HELP_COUNT = 1000;
     public static final int HELP_RADIUS = SQUARES_ACROSS / 30;
     public static final double PEN_SPEED = SQUARES_ACROSS / 600.0;
@@ -32,7 +32,7 @@ public class Main extends BasicGame {
         final DisplayMode mode = getDisplayMode();
         squareSize = mode.getWidth() / SQUARES_ACROSS;
         AppGameContainer container = new AppGameContainer(new Main(), mode.getWidth(), mode.getHeight(), true);
-        container.setShowFPS(true);
+        container.setShowFPS(false);
         container.start();
     }
 
