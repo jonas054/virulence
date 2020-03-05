@@ -24,6 +24,7 @@ public class Main extends BasicGame {
     private double pen_y_direction;
     private int eraser_x = -1;
     private int eraser_y = -1;
+    private boolean leftShiftKeyIsDown;
 
     public Main() {
         super("Virulence");
@@ -154,6 +155,15 @@ public class Main extends BasicGame {
         erase(oldy / squareSize, oldx / squareSize);
     }
 
+    @Override
+    public void mouseMoved(int oldx, int oldy, int newx, int newy) {
+        if (leftShiftKeyIsDown) {
+            eraser_x = newx;
+            eraser_y = newy;
+            mouseDragged(oldx, oldy, newx, newy);
+        }
+    }
+
     private void erase(int row, int column) {
         final int radius = ERASE_RADIUS;
         int x1 = limits(column - radius, getWidth());
@@ -241,11 +251,18 @@ public class Main extends BasicGame {
             case Input.KEY_RIGHT:
                 pen_x_direction = PEN_SPEED;
                 break;
+            case Input.KEY_LSHIFT:
+                leftShiftKeyIsDown = true;
+                break;
         }
     }
 
     @Override
     public void keyReleased(int key, char c) {
         pen_x_direction = pen_y_direction = 0;
+        if (key == Input.KEY_LSHIFT) {
+            leftShiftKeyIsDown = false;
+            eraser_x = -1;
+        }
     }
 }
