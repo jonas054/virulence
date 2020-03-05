@@ -20,8 +20,7 @@ public class Main extends BasicGame {
     private Color[][] grid;
     private Random random = new Random();
     private Pen pen;
-    private int eraser_x = -1;
-    private int eraser_y = -1;
+    private Eraser eraser = new Eraser(ERASE_RADIUS);
     private boolean leftShiftKeyIsDown;
 
     public Main() {
@@ -94,11 +93,7 @@ public class Main extends BasicGame {
     public void render(GameContainer gameContainer, Graphics g) {
         drawGrid(g);
         pen.flicker(g, squareSize);
-        if (eraser_x != -1) {
-            final int eraserRadius = ERASE_RADIUS * squareSize;
-            g.setColor(Color.white);
-            g.fillRect(eraser_x - eraserRadius, eraser_y - eraserRadius, 2 * eraserRadius, 2 * eraserRadius);
-        }
+        eraser.draw(g, squareSize);
     }
 
     private void drawGrid(Graphics g) {
@@ -118,31 +113,27 @@ public class Main extends BasicGame {
         final int column = x / squareSize;
 
         if (button == Input.MOUSE_LEFT_BUTTON) {
-            eraser_x = x;
-            eraser_y = y;
+            eraser.setPosition(x, y);
             erase(row, column);
         } else {
-            eraser_x = -1;
-            eraser_y = -1;
+            eraser.hide();
             buildCage(row, column);
         }
     }
 
     @Override
     public void mouseDragged(int oldx, int oldy, int newx, int newy) {
-        if (eraser_x == -1)
+        if (eraser.isHidden())
             return;
 
-        eraser_x = newx;
-        eraser_y = newy;
+        eraser.setPosition(newx, newy);
         erase(oldy / squareSize, oldx / squareSize);
     }
 
     @Override
     public void mouseMoved(int oldx, int oldy, int newx, int newy) {
         if (leftShiftKeyIsDown) {
-            eraser_x = newx;
-            eraser_y = newy;
+            eraser.setPosition(newx, newy);
             mouseDragged(oldx, oldy, newx, newy);
         }
     }
@@ -162,8 +153,7 @@ public class Main extends BasicGame {
 
     @Override
     public void mouseReleased(int button, int x, int y) {
-        eraser_x = -1;
-        eraser_y = -1;
+        eraser.hide();
     }
 
     private void buildCage(int row, int column) {
@@ -231,7 +221,7 @@ public class Main extends BasicGame {
         pen.keyReleased();
         if (key == Input.KEY_LSHIFT) {
             leftShiftKeyIsDown = false;
-            eraser_x = -1;
+            eraser.hide();
         }
     }
 }

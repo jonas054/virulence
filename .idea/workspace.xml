@@ -6,7 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aa6a487-0c26-47b0-bf6e-73f5e08d0429" name="Default Changelist" comment="Add the feature of walls drawn with arrow keys">
+    <list default="true" id="4aa6a487-0c26-47b0-bf6e-73f5e08d0429" name="Default Changelist" comment="Extract class Pen from Main">
+      <change afterPath="$PROJECT_DIR$/src/Eraser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -14,6 +15,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -136,7 +144,19 @@
       <option name="presentableId" value="LOCAL−00010" />
       <updated>1583339506707</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL−00011" summary="Add draggable eraser instead of blasting through walls on click">
+      <created>1583356628966</created>
+      <option name="number" value="LOCAL−00011" />
+      <option name="presentableId" value="LOCAL−00011" />
+      <updated>1583356628966</updated>
+    </task>
+    <task id="LOCAL−00012" summary="Extract class Pen from Main">
+      <created>1583435097534</created>
+      <option name="number" value="LOCAL−00012" />
+      <option name="presentableId" value="LOCAL−00012" />
+      <updated>1583435097534</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,14 +178,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First version" />
     <MESSAGE value="Add Slick2d and LWJGL jar files" />
-    <MESSAGE value="Add the feature of walls drawn with arrow keys" />
     <MESSAGE value="Fix title" />
     <MESSAGE value="Make non-fullscreen" />
     <MESSAGE value="Calculate pen speed" />
     <MESSAGE value="Clear away inner walls inside a newly built cage" />
     <MESSAGE value="Restore 300 squares across and don't show FPS" />
     <MESSAGE value="Refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor" />
+    <MESSAGE value="Add the feature of walls drawn with arrow keys" />
+    <MESSAGE value="Add draggable eraser instead of blasting through walls on click" />
+    <MESSAGE value="Extract class Pen from Main" />
+    <option name="LAST_COMMIT_MESSAGE" value="Extract class Pen from Main" />
   </component>
   <component name="WindowStateProjectService">
     <state x="451" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582961444610">
@@ -180,30 +202,30 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="725" y="338" width="525" height="428" key="#com.intellij.ide.util.TreeClassChooserDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1582961384524" />
-    <state x="132" y="94" width="1701" height="917" key="CommitChangelistDialog2" timestamp="1583355050711">
+    <state x="132" y="94" width="1701" height="917" key="CommitChangelistDialog2" timestamp="1583435731215">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="132" y="94" width="1701" height="917" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1583355050711" />
+    <state x="132" y="94" width="1701" height="917" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1583435731215" />
     <state x="615" y="296" width="735" height="513" key="FileChooserDialogImpl" timestamp="1582961301116">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="615" y="296" width="735" height="513" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1582961301116" />
-    <state width="1807" height="278" key="GridCell.Tab.0.bottom" timestamp="1583355678292">
+    <state width="1807" height="278" key="GridCell.Tab.0.bottom" timestamp="1583435684074">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1583355678292" />
-    <state width="1807" height="278" key="GridCell.Tab.0.center" timestamp="1583355678292">
+    <state width="1807" height="278" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1583435684074" />
+    <state width="1807" height="278" key="GridCell.Tab.0.center" timestamp="1583435684072">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1583355678291" />
-    <state width="1807" height="278" key="GridCell.Tab.0.left" timestamp="1583355678291">
+    <state width="1807" height="278" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1583435684072" />
+    <state width="1807" height="278" key="GridCell.Tab.0.left" timestamp="1583435684071">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1583355678291" />
-    <state width="1807" height="278" key="GridCell.Tab.0.right" timestamp="1583355678292">
+    <state width="1807" height="278" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1583435684071" />
+    <state width="1807" height="278" key="GridCell.Tab.0.right" timestamp="1583435684073">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1583355678292" />
+    <state width="1807" height="278" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1583435684073" />
     <state x="800" y="489" width="377" height="126" key="ReplaceDuplicatesPrompt" timestamp="1583303068947">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -212,10 +234,10 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="476" y="130" width="1024" height="845" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1582961249722" />
-    <state x="588" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1583339509166">
+    <state x="588" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1583356638105">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="588" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2/67.27.1853.1053@67.27.1853.1053" timestamp="1583339509166" />
+    <state x="588" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2/67.27.1853.1053@67.27.1853.1053" timestamp="1583356638105" />
     <state x="649" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1583175181797">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -228,10 +250,18 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="726" y="292" width="562" height="520" key="extract.method.dialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583355292045" />
+    <state x="638" y="264" width="710" height="576" key="find.popup" timestamp="1583435080916">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="638" y="264" width="710" height="576" key="find.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1583435080916" />
     <state x="674" y="345" width="629" height="415" key="git4idea.merge.GitPullDialog" timestamp="1583175201170">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="674" y="345" width="629" height="415" key="git4idea.merge.GitPullDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583175201170" />
+    <state x="689" y="171" width="598" height="762" key="refactoring.ChangeSignatureDialog" timestamp="1583434710787">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="689" y="171" width="598" height="762" key="refactoring.ChangeSignatureDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583434710787" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
