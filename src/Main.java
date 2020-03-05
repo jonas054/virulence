@@ -17,7 +17,7 @@ public class Main extends BasicGame {
     public static final double PEN_SPEED = SQUARES_ACROSS / 600.0;
     public static final int CAGE_SIZE = SQUARES_ACROSS / 15;
     private static int squareSize;
-    private Color[][] grid;
+    private Screen screen;
     private Random random = new Random();
     private Pen pen;
     private Eraser eraser = new Eraser(ERASE_RADIUS);
@@ -39,13 +39,11 @@ public class Main extends BasicGame {
     public void init(GameContainer gameContainer) throws SlickException {
         try {
             final DisplayMode mode = getDisplayMode();
-            final int width = mode.getWidth();
-            final int height = mode.getHeight();
-            grid = new Color[height / squareSize + 1][width / squareSize + 1];
+            screen = new Screen(mode.getWidth(), mode.getHeight(), squareSize);
         } catch (LWJGLException e) {
             throw new SlickException(e.getMessage(), e);
         }
-        pen = new Pen(PEN_SPEED, getWidth(), getHeight(), grid);
+        pen = new Pen(PEN_SPEED, screen.getWidth(), screen.getHeight(), screen);
         placeInitialColoredDots();
     }
 
@@ -65,7 +63,7 @@ public class Main extends BasicGame {
     private void placeInitialColoredDots() {
         Color[] colors = {Color.blue, Color.green.darker(), Color.orange, Color.magenta, Color.red, Color.cyan};
         for (int i = 0; i < colors.length; ++i)
-            grid[random.nextInt(getHeight())][random.nextInt(getWidth())] = colors[i % colors.length];
+            screen.set(random.nextInt(screen.getHeight()), random.nextInt(screen.getWidth()), colors[i % colors.length]);
     }
 
     @Override
@@ -75,16 +73,16 @@ public class Main extends BasicGame {
     }
 
     private void addRandomDotsOfCopiedColors() {
-        final int max = getHeight() * getWidth();
+        final int max = screen.getHeight() * screen.getWidth();
         for (int i = 0; i < max; i++) {
-            int x = random.nextInt(getWidth());
-            int y = random.nextInt(getHeight());
+            int x = random.nextInt(screen.getWidth());
+            int y = random.nextInt(screen.getHeight());
             int other_x = x + random.nextInt(3) - 1;
             int other_y = y + random.nextInt(3) - 1;
             if ((other_x != x || other_y != y) && isInsideGrid(other_x, other_y)) {
-                final Color other = grid[other_y][other_x];
-                if (other != null && other != Color.white && grid[y][x] != Color.white)
-                    grid[y][x] = other;
+                final Color other = screen.get(other_x, other_y);
+                if (other != null && other != Color.white && screen.get(x, y) != Color.white)
+                    screen.set(y, x, other);
             }
         }
     }
@@ -97,9 +95,9 @@ public class Main extends BasicGame {
     }
 
     private void drawGrid(Graphics g) {
-        for (int y = 0; y < getHeight(); y++)
-            for (int x = 0; x < getWidth(); x++) {
-                final Color color = grid[y][x];
+        for (int y = 0; y < screen.getHeight(); y++)
+            for (int x = 0; x < screen.getWidth(); x++) {
+                final Color color = screen.get(x, y);
                 if (color != null) {
                     g.setColor(color);
                     g.fillRect(x * squareSize, y * squareSize, squareSize, squareSize);
@@ -140,13 +138,13 @@ public class Main extends BasicGame {
 
     private void erase(int row, int column) {
         final int radius = ERASE_RADIUS;
-        int x1 = limits(column - radius, getWidth());
-        int x2 = limits(column + radius, getWidth());
-        int y1 = limits(row - radius, getHeight());
-        int y2 = limits(row + radius, getHeight());
+        int x1 = limits(column - radius, screen.getWidth());
+        int x2 = limits(column + radius, screen.getWidth());
+        int y1 = limits(row - radius, screen.getHeight());
+        int y2 = limits(row + radius, screen.getHeight());
         for (int yy = y1; yy <= y2; ++yy) {
             for (int xx = x1; xx <= x2; ++xx) {
-                grid[yy][xx] = null;
+                screen.set(yy, xx, null);
             }
         }
     }
@@ -158,55 +156,20 @@ public class Main extends BasicGame {
 
     private void buildCage(int row, int column) {
         final int radius = CAGE_SIZE / 2;
-        int x1 = limits(column - radius, getWidth());
-        int x2 = limits(column + radius, getWidth());
-        int y1 = limits(row - radius, getHeight());
-        int y2 = limits(row + radius, getHeight());
-        drawFourWalls(x1, x2, y1, y2);
-        removeWalls(x1, x2, y1, y2);
-    }
-
-    private void drawFourWalls(int x1, int x2, int y1, int y2) {
-        drawLine(x1, y1, x2, y1);
-        drawLine(x1, y2, x2, y2);
-        drawLine(x1, y1, x1, y2);
-        drawLine(x2, y1, x2, y2);
-    }
-
-    private void removeWalls(int x1, int x2, int y1, int y2) {
-        for (int yy = y1 + 1; yy < y2; ++yy) {
-            for (int xx = x1 + 1; xx < x2; ++xx) {
-                if (grid[yy][xx] == Color.white) {
-                    grid[yy][xx] = null;
-                }
-            }
-        }
-    }
-
-    private int getHeight() {
-        return grid.length;
-    }
-
-    private int getWidth() {
-        return grid[0].length;
+        int x1 = limits(column - radius, screen.getWidth());
+        int x2 = limits(column + radius, screen.getWidth());
+        int y1 = limits(row - radius, screen.getHeight());
+        int y2 = limits(row + radius, screen.getHeight());
+        screen.drawFourWalls(x1, x2, y1, y2);
+        screen.removeWalls(x1, x2, y1, y2);
     }
 
     private boolean isInsideGrid(int x, int y) {
-        return x >= 0 && y >= 0 && x < getWidth() && y < getHeight();
+        return x >= 0 && y >= 0 && x < screen.getWidth() && y < screen.getHeight();
     }
 
     private int limits(int a, int maximum) {
         return Math.min(Math.max(a, 0), maximum - 1);
-    }
-
-    private void drawLine(int x1, int y1, int x2, int y2) {
-        if (y1 == y2) {
-            for (int x = x1; x <= x2; ++x)
-                grid[y1][x] = Color.white;
-        } else {
-            for (int y = y1; y <= y2; ++y)
-                grid[y][x1] = Color.white;
-        }
     }
 
     @Override

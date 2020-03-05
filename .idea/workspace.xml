@@ -6,10 +6,11 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aa6a487-0c26-47b0-bf6e-73f5e08d0429" name="Default Changelist" comment="Extract class Pen from Main">
-      <change afterPath="$PROJECT_DIR$/src/Eraser.java" afterDir="false" />
+    <list default="true" id="4aa6a487-0c26-47b0-bf6e-73f5e08d0429" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Screen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +56,9 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib" />
     </key>
@@ -156,7 +160,13 @@
       <option name="presentableId" value="LOCAL−00012" />
       <updated>1583435097534</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL−00013" summary="Extract class Eraser from Main">
+      <created>1583435772250</created>
+      <option name="number" value="LOCAL−00013" />
+      <option name="presentableId" value="LOCAL−00013" />
+      <updated>1583435772250</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,7 +197,8 @@
     <MESSAGE value="Add the feature of walls drawn with arrow keys" />
     <MESSAGE value="Add draggable eraser instead of blasting through walls on click" />
     <MESSAGE value="Extract class Pen from Main" />
-    <option name="LAST_COMMIT_MESSAGE" value="Extract class Pen from Main" />
+    <MESSAGE value="Extract class Eraser from Main" />
+    <option name="LAST_COMMIT_MESSAGE" value="Extract class Eraser from Main" />
   </component>
   <component name="WindowStateProjectService">
     <state x="451" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582961444610">
@@ -202,30 +213,30 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="725" y="338" width="525" height="428" key="#com.intellij.ide.util.TreeClassChooserDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1582961384524" />
-    <state x="132" y="94" width="1701" height="917" key="CommitChangelistDialog2" timestamp="1583435731215">
+    <state x="132" y="94" width="1701" height="917" key="CommitChangelistDialog2" timestamp="1583435772190">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="132" y="94" width="1701" height="917" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1583435731215" />
+    <state x="132" y="94" width="1701" height="917" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1583435772190" />
     <state x="615" y="296" width="735" height="513" key="FileChooserDialogImpl" timestamp="1582961301116">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="615" y="296" width="735" height="513" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1582961301116" />
-    <state width="1807" height="278" key="GridCell.Tab.0.bottom" timestamp="1583435684074">
+    <state width="1807" height="278" key="GridCell.Tab.0.bottom" timestamp="1583438888300">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1583435684074" />
-    <state width="1807" height="278" key="GridCell.Tab.0.center" timestamp="1583435684072">
+    <state width="1807" height="278" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1583438888300" />
+    <state width="1807" height="278" key="GridCell.Tab.0.center" timestamp="1583438888298">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1583435684072" />
-    <state width="1807" height="278" key="GridCell.Tab.0.left" timestamp="1583435684071">
+    <state width="1807" height="278" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1583438888298" />
+    <state width="1807" height="278" key="GridCell.Tab.0.left" timestamp="1583438888297">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1583435684071" />
-    <state width="1807" height="278" key="GridCell.Tab.0.right" timestamp="1583435684073">
+    <state width="1807" height="278" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1583438888297" />
+    <state width="1807" height="278" key="GridCell.Tab.0.right" timestamp="1583438888299">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1583435684073" />
+    <state width="1807" height="278" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1583438888299" />
     <state x="800" y="489" width="377" height="126" key="ReplaceDuplicatesPrompt" timestamp="1583303068947">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>

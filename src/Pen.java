@@ -5,7 +5,7 @@ import org.newdawn.slick.Input;
 import java.util.Random;
 
 public class Pen {
-    private final Color[][] grid;
+    private final Screen screen;
     private double x, y;
     private double xDirection = 0.0;
     private double yDirection = 0.0;
@@ -14,19 +14,19 @@ public class Pen {
     private final int height;
     private final Random random = new Random();
 
-    public Pen(double speed, int width, int height, Color[][] grid) {
+    public Pen(double speed, int width, int height, Screen screen) {
         this.x = width / 2.0;
         this.y = height / 2.0;
         this.width = width;
         this.height = height;
         this.speed = speed;
-        this.grid = grid;
+        this.screen = screen;
     }
 
     public void move() {
         x += xDirection;
         y += yDirection;
-        grid[getRow()][getColumn()] = Color.white;
+        screen.set(getRow(), getColumn(), Color.white);
     }
 
     public void keyPressed(int key) {
