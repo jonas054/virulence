@@ -19,9 +19,7 @@ public class Main extends BasicGame {
     private static int squareSize;
     private Color[][] grid;
     private Random random = new Random();
-    private double pen_x, pen_y;
-    private double pen_x_direction;
-    private double pen_y_direction;
+    private Pen pen;
     private int eraser_x = -1;
     private int eraser_y = -1;
     private boolean leftShiftKeyIsDown;
@@ -48,8 +46,7 @@ public class Main extends BasicGame {
         } catch (LWJGLException e) {
             throw new SlickException(e.getMessage(), e);
         }
-        pen_x = getWidth() / 2.0;
-        pen_y = getHeight() / 2.0;
+        pen = new Pen(PEN_SPEED, getWidth(), getHeight(), grid);
         placeInitialColoredDots();
     }
 
@@ -74,16 +71,8 @@ public class Main extends BasicGame {
 
     @Override
     public void update(GameContainer gameContainer, int seconds) {
-        addPen();
+        pen.move();
         addRandomDotsOfCopiedColors();
-    }
-
-    private void addPen() {
-        pen_x += pen_x_direction;
-        pen_y += pen_y_direction;
-        int pen_column = limits((int) Math.round(pen_x), getWidth());
-        int pen_row = limits((int) Math.round(pen_y), getHeight());
-        grid[pen_row][pen_column] = Color.white;
     }
 
     private void addRandomDotsOfCopiedColors() {
@@ -104,7 +93,7 @@ public class Main extends BasicGame {
     @Override
     public void render(GameContainer gameContainer, Graphics g) {
         drawGrid(g);
-        makePenFlicker(g);
+        pen.flicker(g, squareSize);
         if (eraser_x != -1) {
             final int eraserRadius = ERASE_RADIUS * squareSize;
             g.setColor(Color.white);
@@ -121,12 +110,6 @@ public class Main extends BasicGame {
                     g.fillRect(x * squareSize, y * squareSize, squareSize, squareSize);
                 }
             }
-    }
-
-    private void makePenFlicker(Graphics g) {
-        float brightness = random.nextFloat();
-        g.setColor(new Color(brightness, brightness, brightness));
-        g.fillRect(Math.round(pen_x) * squareSize, Math.round(pen_y) * squareSize, squareSize, squareSize);
     }
 
     @Override
@@ -238,28 +221,14 @@ public class Main extends BasicGame {
 
     @Override
     public void keyPressed(int key, char c) {
-        switch (key) {
-            case Input.KEY_DOWN:
-                pen_y_direction = PEN_SPEED;
-                break;
-            case Input.KEY_UP:
-                pen_y_direction = -PEN_SPEED;
-                break;
-            case Input.KEY_LEFT:
-                pen_x_direction = -PEN_SPEED;
-                break;
-            case Input.KEY_RIGHT:
-                pen_x_direction = PEN_SPEED;
-                break;
-            case Input.KEY_LSHIFT:
-                leftShiftKeyIsDown = true;
-                break;
-        }
+        pen.keyPressed(key);
+        if (key == Input.KEY_LSHIFT)
+            leftShiftKeyIsDown = true;
     }
 
     @Override
     public void keyReleased(int key, char c) {
-        pen_x_direction = pen_y_direction = 0;
+        pen.keyReleased();
         if (key == Input.KEY_LSHIFT) {
             leftShiftKeyIsDown = false;
             eraser_x = -1;
