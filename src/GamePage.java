@@ -17,6 +17,10 @@ public class GamePage extends Page {
     private Pen pen;
     private boolean leftShiftKeyIsDown;
 
+    public GamePage(Main main) {
+        super(main);
+    }
+
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
         try {
@@ -98,6 +102,8 @@ public class GamePage extends Page {
         pen.keyPressed(key);
         if (key == Input.KEY_LSHIFT)
             leftShiftKeyIsDown = true;
+        if (key == Input.KEY_ESCAPE)
+            getMain().stopGame();
     }
 
     @Override

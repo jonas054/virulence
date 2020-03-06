@@ -8,10 +8,14 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 public class Main extends BasicGame {
-    private Page currentPage = new GamePage();
+    private final GamePage gamePage;
+    private final MenuPage menuPage;
+    private Page currentPage;
 
     public Main() {
         super("Virulence");
+        currentPage = menuPage = new MenuPage(this);
+        gamePage = new GamePage(this);
     }
 
     public static void main(String[] args) throws SlickException, LWJGLException {
@@ -24,6 +28,7 @@ public class Main extends BasicGame {
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
         currentPage.init(gameContainer);
+        gamePage.init(gameContainer);
     }
 
     static DisplayMode getDisplayMode() throws LWJGLException {
@@ -81,5 +86,13 @@ public class Main extends BasicGame {
 
     static int limits(int a, int maximum) {
         return Math.min(Math.max(a, 0), maximum - 1);
+    }
+
+    public void startGame() {
+        currentPage = gamePage;
+    }
+
+    public void stopGame() {
+        currentPage = menuPage;
     }
 }

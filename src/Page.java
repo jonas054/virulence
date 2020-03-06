@@ -7,6 +7,16 @@ import org.newdawn.slick.MouseListener;
 import org.newdawn.slick.SlickException;
 
 public abstract class Page implements Game, KeyListener, MouseListener {
+    private Main main;
+
+    public Page(Main main) {
+        this.main = main;
+    }
+
+    Main getMain() {
+        return main;
+    }
+
     @Override
     public void setInput(Input input) {
     }
