@@ -8,10 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4aa6a487-0c26-47b0-bf6e-73f5e08d0429" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GamePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MenuPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Page.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +194,13 @@
       <option name="presentableId" value="LOCAL−00016" />
       <updated>1583455929738</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL−00017" summary="Working primitive menu page&#10;&#10;Go back and forth between menu and game. The game state is saved.">
+      <created>1583501644572</created>
+      <option name="number" value="LOCAL−00017" />
+      <option name="presentableId" value="LOCAL−00017" />
+      <updated>1583501644572</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,7 +235,8 @@
     <MESSAGE value="Extract class Screen from Main" />
     <MESSAGE value="More refactoring&#10;&#10;Mainly moving more methods from Main to Screen." />
     <MESSAGE value="Remove public where it is not needed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove public where it is not needed" />
+    <MESSAGE value="Working primitive menu page&#10;&#10;Go back and forth between menu and game. The game state is saved." />
+    <option name="LAST_COMMIT_MESSAGE" value="Working primitive menu page&#10;&#10;Go back and forth between menu and game. The game state is saved." />
   </component>
   <component name="WindowStateProjectService">
     <state x="451" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582961444610">
