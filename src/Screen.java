@@ -21,7 +21,7 @@ class Screen {
     void placeInitialColoredDots() {
         Color[] colors = {Color.blue, Color.green.darker(), Color.orange, Color.magenta, Color.red, Color.cyan};
         for (int i = 0; i < colors.length; ++i)
-            set(random.nextInt(getHeight()), random.nextInt(getWidth()), colors[i % colors.length]);
+            set(random.nextInt(getWidth()), random.nextInt(getHeight()), colors[i % colors.length]);
     }
 
     void addRandomDotsOfCopiedColors() {
@@ -29,12 +29,12 @@ class Screen {
         for (int i = 0; i < max; i++) {
             int x = random.nextInt(getWidth());
             int y = random.nextInt(getHeight());
-            int other_x = x + random.nextInt(3) - 1;
-            int other_y = y + random.nextInt(3) - 1;
-            if ((other_x != x || other_y != y) && isInside(other_x, other_y)) {
-                final Color other = get(other_x, other_y);
-                if (other != null && other != Color.white && get(x, y) != Color.white)
-                    set(y, x, other);
+            int otherX = x + random.nextInt(3) - 1;
+            int otherY = y + random.nextInt(3) - 1;
+            if ((otherX != x || otherY != y) && isInside(otherX, otherY)) {
+                final Color otherColor = get(otherX, otherY);
+                if (otherColor != null && otherColor != Color.white && get(x, y) != Color.white)
+                    set(x, y, otherColor);
             }
         }
     }
@@ -49,10 +49,10 @@ class Screen {
     void drawLine(int x1, int y1, int x2, int y2) {
         if (y1 == y2) {
             for (int x = x1; x <= x2; ++x)
-                set(y1, x, Color.white);
+                set(x, y1, Color.white);
         } else {
             for (int y = y1; y <= y2; ++y)
-                set(y, x1, Color.white);
+                set(x1, y, Color.white);
         }
     }
 
@@ -60,7 +60,7 @@ class Screen {
         for (int yy = y1 + 1; yy < y2; ++yy) {
             for (int xx = x1 + 1; xx < x2; ++xx) {
                 if (get(xx, yy) == Color.white)
-                    set(yy, xx, null);
+                    set(xx, yy, null);
             }
         }
     }
@@ -87,7 +87,7 @@ class Screen {
         int y2 = Main.limits(row + radius, getHeight());
         for (int yy = y1; yy <= y2; ++yy) {
             for (int xx = x1; xx <= x2; ++xx)
-                set(yy, xx, null);
+                set(xx, yy, null);
         }
     }
 
@@ -100,12 +100,12 @@ class Screen {
         removeWalls(x1, x2, y1, y2);
     }
 
-    void set(int row, int column, Color color) {
+    void set(int column, int row, Color color) {
         grid[row][column] = color;
     }
 
-    Color get(int other_x, int other_y) {
-        return grid[other_y][other_x];
+    Color get(int column, int row) {
+        return grid[row][column];
     }
 
     int getHeight() {

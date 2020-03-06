@@ -26,7 +26,7 @@ class Pen {
     void move() {
         x += xDirection;
         y += yDirection;
-        screen.set(getRow(), getColumn(), Color.white);
+        screen.set(getColumn(), getRow(), Color.white);
     }
 
     void keyPressed(int key) {
