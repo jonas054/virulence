@@ -3,13 +3,10 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-
-import java.util.Random;
 
 public class Main extends BasicGame {
     public static final int SQUARES_ACROSS = 300;
@@ -18,7 +15,6 @@ public class Main extends BasicGame {
     public static final int CAGE_SIZE = SQUARES_ACROSS / 15;
     private static int squareSize;
     private Screen screen;
-    private Random random = new Random();
     private Pen pen;
     private Eraser eraser = new Eraser(ERASE_RADIUS);
     private boolean leftShiftKeyIsDown;
@@ -44,7 +40,7 @@ public class Main extends BasicGame {
             throw new SlickException(e.getMessage(), e);
         }
         pen = new Pen(PEN_SPEED, screen.getWidth(), screen.getHeight(), screen);
-        placeInitialColoredDots();
+        screen.placeInitialColoredDots();
     }
 
     private static DisplayMode getDisplayMode() throws LWJGLException {
@@ -60,49 +56,17 @@ public class Main extends BasicGame {
         return modes[max_index];
     }
 
-    private void placeInitialColoredDots() {
-        Color[] colors = {Color.blue, Color.green.darker(), Color.orange, Color.magenta, Color.red, Color.cyan};
-        for (int i = 0; i < colors.length; ++i)
-            screen.set(random.nextInt(screen.getHeight()), random.nextInt(screen.getWidth()), colors[i % colors.length]);
-    }
-
     @Override
     public void update(GameContainer gameContainer, int seconds) {
         pen.move();
-        addRandomDotsOfCopiedColors();
-    }
-
-    private void addRandomDotsOfCopiedColors() {
-        final int max = screen.getHeight() * screen.getWidth();
-        for (int i = 0; i < max; i++) {
-            int x = random.nextInt(screen.getWidth());
-            int y = random.nextInt(screen.getHeight());
-            int other_x = x + random.nextInt(3) - 1;
-            int other_y = y + random.nextInt(3) - 1;
-            if ((other_x != x || other_y != y) && isInsideGrid(other_x, other_y)) {
-                final Color other = screen.get(other_x, other_y);
-                if (other != null && other != Color.white && screen.get(x, y) != Color.white)
-                    screen.set(y, x, other);
-            }
-        }
+        screen.addRandomDotsOfCopiedColors();
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics g) {
-        drawGrid(g);
-        pen.flicker(g, squareSize);
+        screen.paint(g);
+        pen.flicker(g);
         eraser.draw(g, squareSize);
-    }
-
-    private void drawGrid(Graphics g) {
-        for (int y = 0; y < screen.getHeight(); y++)
-            for (int x = 0; x < screen.getWidth(); x++) {
-                final Color color = screen.get(x, y);
-                if (color != null) {
-                    g.setColor(color);
-                    g.fillRect(x * squareSize, y * squareSize, squareSize, squareSize);
-                }
-            }
     }
 
     @Override
@@ -112,10 +76,10 @@ public class Main extends BasicGame {
 
         if (button == Input.MOUSE_LEFT_BUTTON) {
             eraser.setPosition(x, y);
-            erase(row, column);
+            screen.erase(row, column, ERASE_RADIUS);
         } else {
             eraser.hide();
-            buildCage(row, column);
+            screen.buildCage(row, column, CAGE_SIZE / 2);
         }
     }
 
@@ -125,7 +89,7 @@ public class Main extends BasicGame {
             return;
 
         eraser.setPosition(newx, newy);
-        erase(oldy / squareSize, oldx / squareSize);
+        screen.erase(oldy / squareSize, oldx / squareSize, ERASE_RADIUS);
     }
 
     @Override
@@ -136,39 +100,12 @@ public class Main extends BasicGame {
         }
     }
 
-    private void erase(int row, int column) {
-        final int radius = ERASE_RADIUS;
-        int x1 = limits(column - radius, screen.getWidth());
-        int x2 = limits(column + radius, screen.getWidth());
-        int y1 = limits(row - radius, screen.getHeight());
-        int y2 = limits(row + radius, screen.getHeight());
-        for (int yy = y1; yy <= y2; ++yy) {
-            for (int xx = x1; xx <= x2; ++xx) {
-                screen.set(yy, xx, null);
-            }
-        }
-    }
-
     @Override
     public void mouseReleased(int button, int x, int y) {
         eraser.hide();
     }
 
-    private void buildCage(int row, int column) {
-        final int radius = CAGE_SIZE / 2;
-        int x1 = limits(column - radius, screen.getWidth());
-        int x2 = limits(column + radius, screen.getWidth());
-        int y1 = limits(row - radius, screen.getHeight());
-        int y2 = limits(row + radius, screen.getHeight());
-        screen.drawFourWalls(x1, x2, y1, y2);
-        screen.removeWalls(x1, x2, y1, y2);
-    }
-
-    private boolean isInsideGrid(int x, int y) {
-        return x >= 0 && y >= 0 && x < screen.getWidth() && y < screen.getHeight();
-    }
-
-    private int limits(int a, int maximum) {
+    static int limits(int a, int maximum) {
         return Math.min(Math.max(a, 0), maximum - 1);
     }
 

@@ -46,22 +46,19 @@ public class Pen {
         }
     }
 
-    void flicker(Graphics g, int squareSize) {
+    void flicker(Graphics g) {
         float brightness = random.nextFloat();
+        int squareSize = screen.getSquareSize();
         g.setColor(new Color(brightness, brightness, brightness));
         g.fillRect(getX() * squareSize, getY() * squareSize, squareSize, squareSize);
     }
 
     public int getColumn() {
-        return limits((int) Math.round(x), height);
+        return Main.limits((int) Math.round(x), height);
     }
 
     public int getRow() {
-        return limits((int) Math.round(y), width);
-    }
-
-    private int limits(int a, int maximum) {
-        return Math.min(Math.max(a, 0), maximum - 1);
+        return Main.limits((int) Math.round(y), width);
     }
 
     public int getX() {
