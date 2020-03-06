@@ -3,17 +3,17 @@ import org.newdawn.slick.Graphics;
 
 import java.util.Random;
 
-public class Screen {
+class Screen {
     private Color[][] grid;
     private Random random = new Random();
 
-    public int getSquareSize() {
+    int getSquareSize() {
         return squareSize;
     }
 
     private int squareSize;
 
-    public Screen(int width, int height, int squareSize) {
+    Screen(int width, int height, int squareSize) {
         grid = new Color[height / squareSize + 1][width / squareSize + 1];
         this.squareSize = squareSize;
     }
@@ -100,11 +100,11 @@ public class Screen {
         removeWalls(x1, x2, y1, y2);
     }
 
-    public void set(int row, int column, Color color) {
+    void set(int row, int column, Color color) {
         grid[row][column] = color;
     }
 
-    public Color get(int other_x, int other_y) {
+    Color get(int other_x, int other_y) {
         return grid[other_y][other_x];
     }
 

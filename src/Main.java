@@ -9,10 +9,10 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class Main extends BasicGame {
-    public static final int SQUARES_ACROSS = 300;
-    public static final int ERASE_RADIUS = SQUARES_ACROSS / 100;
-    public static final double PEN_SPEED = SQUARES_ACROSS / 600.0;
-    public static final int CAGE_SIZE = SQUARES_ACROSS / 15;
+    static final int SQUARES_ACROSS = 300;
+    static final int ERASE_RADIUS = SQUARES_ACROSS / 100;
+    static final double PEN_SPEED = SQUARES_ACROSS / 600.0;
+    static final int CAGE_SIZE = SQUARES_ACROSS / 15;
     private static int squareSize;
     private Screen screen;
     private Pen pen;

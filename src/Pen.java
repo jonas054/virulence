@@ -4,7 +4,7 @@ import org.newdawn.slick.Input;
 
 import java.util.Random;
 
-public class Pen {
+class Pen {
     private final Screen screen;
     private double x, y;
     private double xDirection = 0.0;
@@ -14,7 +14,7 @@ public class Pen {
     private final int height;
     private final Random random = new Random();
 
-    public Pen(double speed, int width, int height, Screen screen) {
+    Pen(double speed, int width, int height, Screen screen) {
         this.x = width / 2.0;
         this.y = height / 2.0;
         this.width = width;
@@ -23,13 +23,13 @@ public class Pen {
         this.screen = screen;
     }
 
-    public void move() {
+    void move() {
         x += xDirection;
         y += yDirection;
         screen.set(getRow(), getColumn(), Color.white);
     }
 
-    public void keyPressed(int key) {
+    void keyPressed(int key) {
         switch (key) {
             case Input.KEY_DOWN:
                 setYDirection(1);
@@ -53,19 +53,19 @@ public class Pen {
         g.fillRect(getX() * squareSize, getY() * squareSize, squareSize, squareSize);
     }
 
-    public int getColumn() {
+    int getColumn() {
         return Main.limits((int) Math.round(x), height);
     }
 
-    public int getRow() {
+    int getRow() {
         return Main.limits((int) Math.round(y), width);
     }
 
-    public int getX() {
+    int getX() {
         return (int) Math.round(x);
     }
 
-    public int getY() {
+    int getY() {
         return (int) Math.round(y);
     }
 
@@ -77,7 +77,7 @@ public class Pen {
         xDirection = i * speed;
     }
 
-    public void keyReleased() {
+    void keyReleased() {
         xDirection = 0;
         yDirection = 0;
     }
