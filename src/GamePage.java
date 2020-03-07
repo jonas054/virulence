@@ -6,6 +6,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GamePage extends Page {
     static final int SQUARES_ACROSS = 300;
     static final double PEN_SPEED = SQUARES_ACROSS / 600.0;
@@ -17,7 +20,8 @@ public class GamePage extends Page {
     private Screen screen;
     private Pen pen;
     private boolean leftShiftKeyIsDown;
-    private String score = "";
+    private List<String> score = new ArrayList<>();
+    private int nextScoreUpdate;
 
     public GamePage(Main main) {
         super(main);
@@ -40,18 +44,29 @@ public class GamePage extends Page {
     public void update(GameContainer gameContainer, int seconds) {
         pen.move();
         screen.addRandomDotsOfCopiedColors();
-        score = screen.calculateScore();
+        if (nextScoreUpdate++ % 100 == 0) {
+            score = screen.calculateScore();
+        }
     }
 
     @Override
-    public void render(GameContainer gameContainer, Graphics g) {
+    public void render(GameContainer gameContainer, Graphics g) throws SlickException {
         screen.paint(g);
         pen.flicker(g);
         eraser.draw(g, squareSize);
-        g.setColor(Color.black);
-        g.fillRect(10, 10, 650, 40);
-        g.setColor(Color.white);
-        g.drawString(score, 20, 20);
+        drawTextWithShadow(g, score, 25, 20, Color.white, Color.black);
+    }
+
+    private void drawTextWithShadow(Graphics g, List<String> text, int x, int firstY, Color textColor, Color shadowColor) {
+        int y = firstY;
+        for (String line : text) {
+            g.setColor(shadowColor);
+            g.drawString(line, x + 2, y + 2);
+            g.drawString(line, x, y + 2);
+            g.setColor(textColor);
+            g.drawString(line, x, y);
+            y += 20;
+        }
     }
 
     @Override

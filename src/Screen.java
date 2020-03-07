@@ -1,6 +1,9 @@
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Random;
 
 class Screen {
@@ -121,29 +124,27 @@ class Screen {
         return grid[0].length;
     }
 
-    public String calculateScore() {
-        String result = "";
+    public List<String> calculateScore() {
         int[] score = new int[colors.length];
         int total = 0;
-        for (Color[] row : grid) {
-            for (Color cell : row) {
-                if (cell != null && cell != Color.white) {
-                    total++;
-                }
-            }
-        }
         for (int i = 0; i < colors.length; ++i) {
             Color color = colors[i];
-            result += colorNames[i] + ": ";
             for (Color[] row : grid) {
                 for (Color cell : row) {
                     if (cell == color) {
                         score[i]++;
+                        if (cell != null && cell != Color.white)
+                            total++;
                     }
                 }
             }
-            result += String.format("%.0f%%  ", 100.0 * score[i] / total);
         }
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < colors.length; ++i) {
+            if (score[i] > 0)
+                result.add(String.format("%2.0f%% %s", 100.0 * score[i] / total, colorNames[i]));
+        }
+        result.sort(Comparator.<String>reverseOrder());
         return result;
     }
 }
