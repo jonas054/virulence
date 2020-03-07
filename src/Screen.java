@@ -10,7 +10,7 @@ class Screen {
             Color.blue, Color.green.darker(), Color.orange, Color.magenta, Color.red, Color.cyan
     };
     private final String[] colorNames = {
-            "blue", "green", "orange", "magenta", "red", "cyan"
+            "blue", "green", "yellow", "magenta", "red", "cyan"
     };
 
     int getSquareSize() {
