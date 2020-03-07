@@ -23,7 +23,7 @@ class Screen {
     private int squareSize;
 
     Screen(int width, int height, int squareSize) {
-        grid = new Color[height / squareSize + 1][width / squareSize + 1];
+        grid = new Color[height / squareSize][width / squareSize];
         this.squareSize = squareSize;
     }
 
