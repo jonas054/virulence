@@ -54,11 +54,11 @@ class Pen {
     }
 
     int getColumn() {
-        return Main.limits((int) Math.round(x), height);
+        return Main.limits((int) Math.round(x), width);
     }
 
     int getRow() {
-        return Main.limits((int) Math.round(y), width);
+        return Main.limits((int) Math.round(y), height);
     }
 
     int getX() {

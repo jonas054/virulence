@@ -8,7 +8,10 @@
   <component name="ChangeListManager">
     <list default="true" id="4aa6a487-0c26-47b0-bf6e-73f5e08d0429" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GamePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MenuPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,18 +63,6 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application">
@@ -194,11 +185,11 @@
       <option name="presentableId" value="LOCAL−00016" />
       <updated>1583455929738</updated>
     </task>
-    <task id="LOCAL−00017" summary="Working primitive menu page&#10;&#10;Go back and forth between menu and game. The game state is saved.">
-      <created>1583501644572</created>
+    <task id="LOCAL−00017" summary="Introduce pages so we can have a menu (no menu yet)">
+      <created>1583473389339</created>
       <option name="number" value="LOCAL−00017" />
       <option name="presentableId" value="LOCAL−00017" />
-      <updated>1583501644572</updated>
+      <updated>1583473389339</updated>
     </task>
     <option name="localTasksCounter" value="18" />
     <servers />
@@ -235,8 +226,8 @@
     <MESSAGE value="Extract class Screen from Main" />
     <MESSAGE value="More refactoring&#10;&#10;Mainly moving more methods from Main to Screen." />
     <MESSAGE value="Remove public where it is not needed" />
-    <MESSAGE value="Working primitive menu page&#10;&#10;Go back and forth between menu and game. The game state is saved." />
-    <option name="LAST_COMMIT_MESSAGE" value="Working primitive menu page&#10;&#10;Go back and forth between menu and game. The game state is saved." />
+    <MESSAGE value="Introduce pages so we can have a menu (no menu yet)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Introduce pages so we can have a menu (no menu yet)" />
   </component>
   <component name="WindowStateProjectService">
     <state x="451" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582961444610">
@@ -251,10 +242,10 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="725" y="338" width="525" height="428" key="#com.intellij.ide.util.TreeClassChooserDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1582961384524" />
-    <state x="132" y="94" width="1701" height="917" key="CommitChangelistDialog2" timestamp="1583455929679">
+    <state x="132" y="94" width="1701" height="917" key="CommitChangelistDialog2" timestamp="1583574097377">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="132" y="94" width="1701" height="917" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1583455929679" />
+    <state x="132" y="94" width="1701" height="917" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1583574097377" />
     <state x="167" y="125" width="1653" height="855" key="DiffContextDialog" timestamp="1583473215861">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -263,22 +254,26 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="615" y="296" width="735" height="513" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1582961301116" />
-    <state width="1807" height="278" key="GridCell.Tab.0.bottom" timestamp="1583473287135">
+    <state width="1807" height="278" key="GridCell.Tab.0.bottom" timestamp="1583522746623">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1583473287135" />
-    <state width="1807" height="278" key="GridCell.Tab.0.center" timestamp="1583473287135">
+    <state width="1807" height="278" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1583522746623" />
+    <state width="1807" height="278" key="GridCell.Tab.0.center" timestamp="1583522746622">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1583473287135" />
-    <state width="1807" height="278" key="GridCell.Tab.0.left" timestamp="1583473287134">
+    <state width="1807" height="278" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1583522746622" />
+    <state width="1807" height="278" key="GridCell.Tab.0.left" timestamp="1583522746622">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1583473287134" />
-    <state width="1807" height="278" key="GridCell.Tab.0.right" timestamp="1583473287135">
+    <state width="1807" height="278" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1583522746622" />
+    <state width="1807" height="278" key="GridCell.Tab.0.right" timestamp="1583522746623">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1583473287135" />
+    <state width="1807" height="278" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1583522746623" />
+    <state x="698" y="268" width="580" height="568" key="MultipleFileMergeDialog" timestamp="1583510559259">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="698" y="268" width="580" height="568" key="MultipleFileMergeDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583510559259" />
     <state x="800" y="489" width="377" height="126" key="ReplaceDuplicatesPrompt" timestamp="1583303068947">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -287,18 +282,18 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="476" y="130" width="1024" height="845" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1582961249722" />
-    <state x="588" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1583455932073">
+    <state x="588" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1583473392035">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="588" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2/67.27.1853.1053@67.27.1853.1053" timestamp="1583455932073" />
+    <state x="588" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2/67.27.1853.1053@67.27.1853.1053" timestamp="1583473392035" />
     <state x="649" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1583175181797">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="649" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583175181797" />
-    <state x="761" y="472" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1583338139455">
+    <state x="761" y="472" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1583510552539">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="761" y="472" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.27.1853.1053@67.27.1853.1053" timestamp="1583338139455" />
+    <state x="761" y="472" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.27.1853.1053@67.27.1853.1053" timestamp="1583510552539" />
     <state x="726" y="292" width="562" height="520" key="extract.method.dialog" timestamp="1583355292045">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
