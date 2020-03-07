@@ -1,5 +1,6 @@
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.DisplayMode;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -16,6 +17,7 @@ public class GamePage extends Page {
     private Screen screen;
     private Pen pen;
     private boolean leftShiftKeyIsDown;
+    private String score = "";
 
     public GamePage(Main main) {
         super(main);
@@ -38,6 +40,7 @@ public class GamePage extends Page {
     public void update(GameContainer gameContainer, int seconds) {
         pen.move();
         screen.addRandomDotsOfCopiedColors();
+        score = screen.calculateScore();
     }
 
     @Override
@@ -45,6 +48,10 @@ public class GamePage extends Page {
         screen.paint(g);
         pen.flicker(g);
         eraser.draw(g, squareSize);
+        g.setColor(Color.black);
+        g.fillRect(10, 10, 650, 40);
+        g.setColor(Color.white);
+        g.drawString(score, 20, 20);
     }
 
     @Override

@@ -6,6 +6,12 @@ import java.util.Random;
 class Screen {
     private Color[][] grid;
     private Random random = new Random();
+    private final Color[] colors = {
+            Color.blue, Color.green.darker(), Color.orange, Color.magenta, Color.red, Color.cyan
+    };
+    private final String[] colorNames = {
+            "blue", "green", "orange", "magenta", "red", "cyan"
+    };
 
     int getSquareSize() {
         return squareSize;
@@ -19,7 +25,6 @@ class Screen {
     }
 
     void placeInitialColoredDots() {
-        Color[] colors = {Color.blue, Color.green.darker(), Color.orange, Color.magenta, Color.red, Color.cyan};
         for (int i = 0; i < colors.length; ++i)
             set(random.nextInt(getWidth()), random.nextInt(getHeight()), colors[i % colors.length]);
     }
@@ -114,5 +119,31 @@ class Screen {
 
     int getWidth() {
         return grid[0].length;
+    }
+
+    public String calculateScore() {
+        String result = "";
+        int[] score = new int[colors.length];
+        int total = 0;
+        for (Color[] row : grid) {
+            for (Color cell : row) {
+                if (cell != null && cell != Color.white) {
+                    total++;
+                }
+            }
+        }
+        for (int i = 0; i < colors.length; ++i) {
+            Color color = colors[i];
+            result += colorNames[i] + ": ";
+            for (Color[] row : grid) {
+                for (Color cell : row) {
+                    if (cell == color) {
+                        score[i]++;
+                    }
+                }
+            }
+            result += String.format("%.0f%%  ", 100.0 * score[i] / total);
+        }
+        return result;
     }
 }
