@@ -5,8 +5,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import java.util.stream.Collectors;
-
 public class MenuPage extends Page {
   private int line;
 
@@ -15,14 +13,10 @@ public class MenuPage extends Page {
   }
 
   @Override
-  public void init(GameContainer gameContainer) throws SlickException {
-
-  }
+  public void init(GameContainer gameContainer) {}
 
   @Override
-  public void update(GameContainer gameContainer, int i) throws SlickException {
-
-  }
+  public void update(GameContainer gameContainer, int i) {}
 
   @Override
   public void render(GameContainer gameContainer, Graphics g) throws SlickException {
@@ -42,7 +36,7 @@ public class MenuPage extends Page {
     write(g, "Control the spreading of colors!");
     write(g, "");
     write(g, "Pick a color. Build walls around this color, expand the walls, and " +
-            "make the color it fill the whole screen.");
+            "make the color fill the whole screen.");
     write(g, "Use arrow keys to draw walls.");
     write(g, "Right-click to build a cage with four walls.");
     write(g, "Hold down the left mouse button to erase walls. " +
@@ -53,7 +47,7 @@ public class MenuPage extends Page {
   }
 
   private void write(Graphics g, String text) {
-    g.drawString(text, 100, 100 + 20 * line++);
+    g.drawString(text, 100, 100 + 30 * line++);
   }
 
   @Override
@@ -68,22 +62,18 @@ public class MenuPage extends Page {
 
   @Override
   public void keyPressed(int i, char c) {
-
   }
 
   @Override
   public void keyReleased(int i, char c) {
-
   }
 
   @Override
   public void mouseWheelMoved(int i) {
-
   }
 
   @Override
   public void mouseClicked(int i, int i1, int i2, int i3) {
-
   }
 
   @Override
@@ -93,16 +83,13 @@ public class MenuPage extends Page {
 
   @Override
   public void mouseReleased(int i, int i1, int i2) {
-
   }
 
   @Override
   public void mouseMoved(int i, int i1, int i2, int i3) {
-
   }
 
   @Override
   public void mouseDragged(int i, int i1, int i2, int i3) {
-
   }
 }
