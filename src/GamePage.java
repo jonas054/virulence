@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GamePage extends Page {
-    static final int SQUARES_ACROSS = 300;
+    static final int SQUARES_ACROSS = 250;
     static final double PEN_SPEED = SQUARES_ACROSS / 600.0;
-    static final int ERASE_RADIUS = SQUARES_ACROSS / 100;
+    static final int ERASE_RADIUS = SQUARES_ACROSS / 70;
     static final int CAGE_SIZE = SQUARES_ACROSS / 15;
 
     private Eraser eraser = new Eraser(ERASE_RADIUS);
