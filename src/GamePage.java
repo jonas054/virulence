@@ -9,19 +9,20 @@ import org.newdawn.slick.SlickException;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.awt.Point;
+
 public class GamePage extends Page {
-    static final int SQUARES_ACROSS = 250;
-    static final double PEN_SPEED = SQUARES_ACROSS / 600.0;
+    static final int SQUARES_ACROSS = 275;
     static final int ERASE_RADIUS = SQUARES_ACROSS / 70;
-    static final int CAGE_SIZE = SQUARES_ACROSS / 15;
 
     private Eraser eraser = new Eraser(ERASE_RADIUS);
     private static int squareSize;
     private Screen screen;
-    private Pen pen;
     private boolean leftShiftKeyIsDown;
     private List<String> score = new ArrayList<>();
     private int nextScoreUpdate;
+    private Point firstPoint;
+    private Point secondPoint;
 
     public GamePage(Main main) {
         super(main);
@@ -36,15 +37,13 @@ public class GamePage extends Page {
         } catch (LWJGLException e) {
             throw new SlickException(e.getMessage(), e);
         }
-        pen = new Pen(PEN_SPEED, screen.getWidth(), screen.getHeight(), screen);
         screen.placeInitialColoredDots();
     }
 
     @Override
     public void update(GameContainer gameContainer, int seconds) {
-        pen.move();
         screen.addRandomDotsOfCopiedColors();
-        if (nextScoreUpdate++ % 100 == 0) {
+        if (nextScoreUpdate++ % 20 == 0) {
             score = screen.calculateScore();
         }
     }
@@ -52,18 +51,20 @@ public class GamePage extends Page {
     @Override
     public void render(GameContainer gameContainer, Graphics g) throws SlickException {
         screen.paint(g);
-        pen.flicker(g);
+        if (firstPoint != null && secondPoint != null) {
+            screen.drawOutline(g, firstPoint, secondPoint);
+        }
         eraser.draw(g, squareSize);
-        drawTextWithShadow(g, score, 25, 20, Color.white, Color.black);
+        drawTextWithShadow(g, score, 25, 20);
     }
 
-    private void drawTextWithShadow(Graphics g, List<String> text, int x, int firstY, Color textColor, Color shadowColor) {
+    private void drawTextWithShadow(Graphics g, List<String> text, int x, int firstY) {
         int y = firstY;
         for (String line : text) {
-            g.setColor(shadowColor);
+            g.setColor(Color.black);
             drawShadow(g, x, y, line, 1);
             drawShadow(g, x, y, line, 2);
-            g.setColor(textColor);
+            g.setColor(Color.white);
             g.drawString(line, x, y);
             y += 20;
         }
@@ -87,25 +88,18 @@ public class GamePage extends Page {
 
     @Override
     public void mousePressed(int button, int x, int y) {
-        final int row = y / squareSize;
-        final int column = x / squareSize;
-
-        if (button == Input.MOUSE_LEFT_BUTTON) {
-            eraser.setPosition(x, y);
-            screen.erase(row, column, ERASE_RADIUS);
-        } else {
-            eraser.hide();
-            screen.buildCage(row, column, CAGE_SIZE / 2);
-        }
+        firstPoint = new Point(x, y);
+        secondPoint = new Point(x, y);
     }
 
     @Override
     public void mouseDragged(int oldx, int oldy, int newx, int newy) {
-        if (eraser.isHidden())
-            return;
-
-        eraser.setPosition(newx, newy);
-        screen.erase(oldy / squareSize, oldx / squareSize, ERASE_RADIUS);
+        if (secondPoint != null)
+            secondPoint.move(newx, newy);
+        if (eraser.isVisible()) {
+            eraser.setPosition(newx, newy);
+            screen.erase(oldy / squareSize, oldx / squareSize, ERASE_RADIUS);
+        }
     }
 
     @Override
@@ -118,16 +112,21 @@ public class GamePage extends Page {
 
     @Override
     public void mouseReleased(int button, int x, int y) {
-        eraser.hide();
-    }
-
-    static int limits(int a, int maximum) {
-        return Math.min(Math.max(a, 0), maximum - 1);
+        final Point p1 = this.firstPoint;
+        if (p1 != null) {
+            if (secondPoint == null)
+                secondPoint = new Point(x, y);
+            else
+                secondPoint.move(x, y);
+            final Point p2 = this.secondPoint;
+            final int s = squareSize;
+            screen.drawFourWalls(p1.x / s, p2.x / s, p1.y / s, p2.y / s);
+        }
+        firstPoint = null;
     }
 
     @Override
     public void keyPressed(int key, char c) {
-        pen.keyPressed(key);
         if (key == Input.KEY_LSHIFT)
             leftShiftKeyIsDown = true;
         if (key == Input.KEY_ESCAPE)
@@ -136,7 +135,6 @@ public class GamePage extends Page {
 
     @Override
     public void keyReleased(int key, char c) {
-        pen.keyReleased();
         if (key == Input.KEY_LSHIFT) {
             leftShiftKeyIsDown = false;
             eraser.hide();

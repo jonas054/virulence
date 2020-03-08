@@ -1,6 +1,7 @@
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -15,10 +16,6 @@ class Screen {
     private final String[] colorNames = {
             "blue", "green", "yellow", "magenta", "red", "cyan"
     };
-
-    int getSquareSize() {
-        return squareSize;
-    }
 
     private int squareSize;
 
@@ -48,10 +45,25 @@ class Screen {
     }
 
     void drawFourWalls(int x1, int x2, int y1, int y2) {
+        x1 = Main.limits(x1, getWidth());
+        x2 = Main.limits(x2, getWidth());
+        y1 = Main.limits(y1, getHeight());
+        y2 = Main.limits(y2, getHeight());
+        if (x1 > x2) {
+            int temp = x1;
+            x1 = x2;
+            x2 = temp;
+        }
+        if (y1 > y2) {
+            int temp = y1;
+            y1 = y2;
+            y2 = temp;
+        }
         drawLine(x1, y1, x2, y1);
         drawLine(x1, y2, x2, y2);
         drawLine(x1, y1, x1, y2);
         drawLine(x2, y1, x2, y2);
+        removeWalls(x1, x2, y1, y2);
     }
 
     void drawLine(int x1, int y1, int x2, int y2) {
@@ -99,15 +111,6 @@ class Screen {
         }
     }
 
-    void buildCage(int row, int column, int radius) {
-        int x1 = Main.limits(column - radius, getWidth());
-        int x2 = Main.limits(column + radius, getWidth());
-        int y1 = Main.limits(row - radius, getHeight());
-        int y2 = Main.limits(row + radius, getHeight());
-        drawFourWalls(x1, x2, y1, y2);
-        removeWalls(x1, x2, y1, y2);
-    }
-
     void set(int column, int row, Color color) {
         grid[row][column] = color;
     }
@@ -142,9 +145,15 @@ class Screen {
         List<String> result = new ArrayList<>();
         for (int i = 0; i < colors.length; ++i) {
             if (score[i] > 0)
-                result.add(String.format("%2.0f%% %s", 100.0 * score[i] / total, colorNames[i]));
+                result.add(String.format("%4.1f%% %s", 100.0 * score[i] / total, colorNames[i]));
         }
         result.sort(Comparator.<String>reverseOrder());
         return result;
+    }
+
+    public void drawOutline(Graphics g, Point firstPoint, Point secondPoint) {
+        float brightness = random.nextFloat() / 3 + 0.33F;
+        g.setColor(new Color(brightness, brightness, brightness));
+        g.drawRect(firstPoint.x, firstPoint.y, secondPoint.x - firstPoint.x, secondPoint.y - firstPoint.y);
     }
 }

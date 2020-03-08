@@ -37,12 +37,9 @@ public class MenuPage extends Page {
     write(g, "");
     write(g, "Pick a color. Build walls around this color, expand the walls,");
     write(g, "and make the color fill the whole screen.");
-    write(g, "Use arrow keys to draw walls.");
-    write(g, "Right-click to build a cage with four walls.");
-    write(g, "Hold down the left mouse button to erase walls. Also useful to");
-    write(g, "fight the spreading of other colors.");
-    write(g, "Left-shift on the keyboard can be used as an alternative to");
-    write(g, "the left mouse button.");
+    write(g, "Left-click and drag the mouse to build a cage with four walls.");
+    write(g, "Hold down the left shift key on the keyboard and move the mouse");
+    write(g, "to erase walls. Also useful for fighting (erasing) other colors.");
     write(g, "Click mouse to start, then Esc to pause the game.");
   }
 

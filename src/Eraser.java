@@ -27,7 +27,7 @@ class Eraser {
         x = y = -1;
     }
 
-    boolean isHidden() {
-        return x == -1;
+    boolean isVisible() {
+        return x != -1;
     }
 }
