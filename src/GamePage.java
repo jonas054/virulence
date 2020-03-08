@@ -61,12 +61,18 @@ public class GamePage extends Page {
         int y = firstY;
         for (String line : text) {
             g.setColor(shadowColor);
-            g.drawString(line, x + 2, y + 2);
-            g.drawString(line, x, y + 2);
+            drawShadow(g, x, y, line, 1);
+            drawShadow(g, x, y, line, 2);
             g.setColor(textColor);
             g.drawString(line, x, y);
             y += 20;
         }
+    }
+
+    private void drawShadow(Graphics g, int x, int y, String line, int offset) {
+        g.drawString(line, x + offset, y + offset);
+        g.drawString(line, x, y + offset);
+        g.drawString(line, x + offset, y);
     }
 
     @Override
