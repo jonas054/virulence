@@ -29,3 +29,6 @@ out/
 
 # IntelliJ
 .idea/workspace.xml
+
+# Output
+Virulence
