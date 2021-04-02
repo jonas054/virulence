@@ -12,15 +12,18 @@ public class Main extends BasicGame {
     private final MenuPage menuPage;
     private Page currentPage;
 
-    public Main() {
+    public Main(int windowWidth, int windowHeight) {
         super("Virulence");
         currentPage = menuPage = new MenuPage(this);
-        gamePage = new GamePage(this);
+        gamePage = new GamePage(this, windowWidth, windowHeight);
     }
 
     public static void main(String[] args) throws SlickException, LWJGLException {
         final DisplayMode mode = getDisplayMode();
-        AppGameContainer container = new AppGameContainer(new Main(), mode.getWidth(), mode.getHeight(), true);
+        final int windowWidth = mode.getWidth() - 100;
+        final int windowHeight = mode.getHeight() - 100;
+        AppGameContainer container = new AppGameContainer(new Main(windowWidth, windowHeight),
+                                                          windowWidth, windowHeight, false);
         container.setShowFPS(false);
         container.start();
     }

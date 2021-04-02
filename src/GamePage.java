@@ -23,20 +23,20 @@ public class GamePage extends Page {
     private int nextScoreUpdate;
     private Point firstPoint;
     private Point secondPoint;
+    private Point currentMouse = new Point(20, 25);
+    private int windowWidth;
+    private int windowHeight;
 
-    public GamePage(Main main) {
+    public GamePage(Main main, int windowWidth, int windowHeight) {
         super(main);
+        this.windowWidth = windowWidth;
+        this.windowHeight = windowHeight;
     }
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
-        try {
-            final DisplayMode mode = Main.getDisplayMode();
-            squareSize = mode.getWidth() / SQUARES_ACROSS;
-            screen = new Screen(mode.getWidth(), mode.getHeight(), squareSize);
-        } catch (LWJGLException e) {
-            throw new SlickException(e.getMessage(), e);
-        }
+        squareSize = windowWidth / SQUARES_ACROSS;
+        screen = new Screen(windowWidth, windowHeight, squareSize);
         screen.placeInitialColoredDots();
     }
 
