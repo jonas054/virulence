@@ -55,7 +55,16 @@ public class GamePage extends Page {
             screen.drawOutline(g, firstPoint, secondPoint);
         }
         eraser.draw(g, squareSize);
-        drawTextWithShadow(g, score, 25, 20);
+        Point textPosition = placeText();
+        drawTextWithShadow(g, score, squareSize * textPosition.x, squareSize * textPosition.y);
+    }
+
+    private Point placeText() {
+        if (currentMouse.x > 24 || currentMouse.y > 24) {
+            return new Point(4, 4);
+        } else {
+            return new Point(screen.getWidth() - 40, screen.getHeight() - 40);
+        }
     }
 
     private void drawTextWithShadow(Graphics g, List<String> text, int x, int firstY) {
@@ -104,6 +113,7 @@ public class GamePage extends Page {
 
     @Override
     public void mouseMoved(int oldx, int oldy, int newx, int newy) {
+        currentMouse = new Point(newx / squareSize, newy / squareSize);
         if (leftShiftKeyIsDown) {
             eraser.setPosition(newx, newy);
             mouseDragged(oldx, oldy, newx, newy);
