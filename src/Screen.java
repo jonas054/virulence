@@ -11,10 +11,10 @@ class Screen {
     private Color[][] grid;
     private Random random = new Random();
     private final Color[] colors = {
-            Color.blue, Color.green.darker(), Color.orange, Color.magenta, Color.red, Color.cyan
+        Color.blue, Color.green.darker(), Color.orange, Color.magenta, Color.red, Color.cyan
     };
     private final String[] colorNames = {
-            "blue", "green", "yellow", "magenta", "red", "cyan"
+        "blue", "green", "yellow", "magenta", "red", "cyan"
     };
 
     private int squareSize;
@@ -26,14 +26,16 @@ class Screen {
 
     void placeInitialColoredDots() {
         for (int i = 0; i < colors.length; ++i)
-            set(random.nextInt(getWidth()), random.nextInt(getHeight()), colors[i % colors.length]);
+            set(random.nextInt(getWidth()), random.nextInt(getHeight()), colors[i]);
     }
 
     void addRandomDotsOfCopiedColors() {
-        final int max = getHeight() * getWidth();
+        final int height = getHeight();
+        final int width = getWidth();
+        final int max = height * width;
         for (int i = 0; i < max; i++) {
-            int x = random.nextInt(getWidth());
-            int y = random.nextInt(getHeight());
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
             int otherX = x + random.nextInt(3) - 1;
             int otherY = y + random.nextInt(3) - 1;
             if ((otherX != x || otherY != y) && isInside(otherX, otherY)) {
@@ -154,6 +156,7 @@ class Screen {
     public void drawOutline(Graphics g, Point firstPoint, Point secondPoint) {
         float brightness = random.nextFloat() / 3 + 0.33F;
         g.setColor(new Color(brightness, brightness, brightness));
-        g.drawRect(firstPoint.x, firstPoint.y, secondPoint.x - firstPoint.x, secondPoint.y - firstPoint.y);
+        g.drawRect(firstPoint.x, firstPoint.y,
+                   secondPoint.x - firstPoint.x, secondPoint.y - firstPoint.y);
     }
 }
