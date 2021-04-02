@@ -36,7 +36,7 @@ public class Main extends BasicGame {
 
     static DisplayMode getDisplayMode() throws LWJGLException {
         final DisplayMode[] modes = Display.getAvailableDisplayModes();
-        final int IDEAL = 800;
+        final int IDEAL = 2000;
         int min_diff = 1000000;
         int best_index = 0;
         for (int i = 0; i < modes.length; ++i) {
