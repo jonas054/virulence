@@ -86,16 +86,6 @@ public class GamePage extends Page {
     }
 
     @Override
-    public void mouseWheelMoved(int i) {
-
-    }
-
-    @Override
-    public void mouseClicked(int i, int i1, int i2, int i3) {
-
-    }
-
-    @Override
     public void mousePressed(int button, int x, int y) {
         firstPoint = new Point(x, y);
         secondPoint = new Point(x, y);
@@ -149,15 +139,5 @@ public class GamePage extends Page {
             leftShiftKeyIsDown = false;
             eraser.hide();
         }
-    }
-
-    @Override
-    public boolean closeRequested() {
-        return false;
-    }
-
-    @Override
-    public String getTitle() {
-        return null;
     }
 }

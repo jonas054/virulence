@@ -33,4 +33,22 @@ public abstract class Page implements Game, KeyListener, MouseListener {
     @Override
     public void inputStarted() {
     }
+
+    @Override
+    public boolean closeRequested() {
+        return false;
+    }
+
+    @Override
+    public String getTitle() {
+        return null;
+    }
+
+    @Override
+    public void mouseWheelMoved(int i) {
+    }
+
+    @Override
+    public void mouseClicked(int i, int i1, int i2, int i3) {
+    }
 }

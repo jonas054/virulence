@@ -48,29 +48,11 @@ public class MenuPage extends Page {
   }
 
   @Override
-  public boolean closeRequested() {
-    return false;
-  }
-
-  @Override
-  public String getTitle() {
-    return null;
-  }
-
-  @Override
   public void keyPressed(int i, char c) {
   }
 
   @Override
   public void keyReleased(int i, char c) {
-  }
-
-  @Override
-  public void mouseWheelMoved(int i) {
-  }
-
-  @Override
-  public void mouseClicked(int i, int i1, int i2, int i3) {
   }
 
   @Override
