@@ -24,6 +24,7 @@ public class GamePage extends Page {
     private Point firstPoint;
     private Point secondPoint;
     private Point currentMouse = new Point(20, 25);
+    private Point textPosition = new Point(4, 4);
     private int windowWidth;
     private int windowHeight;
 
@@ -55,16 +56,20 @@ public class GamePage extends Page {
             screen.drawOutline(g, firstPoint, secondPoint);
         }
         eraser.draw(g, squareSize);
-        Point textPosition = placeText();
+        textPosition = placeText();
         drawTextWithShadow(g, score, squareSize * textPosition.x, squareSize * textPosition.y);
     }
 
     private Point placeText() {
+        int x, y;
         if (currentMouse.x > 24 || currentMouse.y > 24) {
-            return new Point(4, 4);
+            x = textPosition.x > 4 ? textPosition.x - 1 : 4;
+            y = textPosition.y > 4 ? textPosition.y - 1 : 4;
         } else {
-            return new Point(screen.getWidth() - 40, screen.getHeight() - 40);
+            x = textPosition.x < 40 ? textPosition.x + 1 : 40;
+            y = textPosition.y < 40 ? textPosition.y + 1 : 40;
         }
+        return new Point(x, y);
     }
 
     private void drawTextWithShadow(Graphics g, List<String> text, int x, int firstY) {
