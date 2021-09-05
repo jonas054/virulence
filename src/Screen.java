@@ -69,22 +69,19 @@ class Screen {
     }
 
     void drawLine(int x1, int y1, int x2, int y2) {
-        if (y1 == y2) {
+        if (y1 == y2)
             for (int x = x1; x <= x2; ++x)
                 set(x, y1, Color.white);
-        } else {
+        else
             for (int y = y1; y <= y2; ++y)
                 set(x1, y, Color.white);
-        }
     }
 
     void removeWalls(int x1, int x2, int y1, int y2) {
-        for (int yy = y1 + 1; yy < y2; ++yy) {
-            for (int xx = x1 + 1; xx < x2; ++xx) {
+        for (int yy = y1 + 1; yy < y2; ++yy)
+            for (int xx = x1 + 1; xx < x2; ++xx)
                 if (get(xx, yy) == Color.white)
                     set(xx, yy, null);
-            }
-        }
     }
 
     boolean isInside(int x, int y) {
@@ -107,10 +104,9 @@ class Screen {
         int x2 = Main.limits(column + radius, getWidth());
         int y1 = Main.limits(row - radius, getHeight());
         int y2 = Main.limits(row + radius, getHeight());
-        for (int yy = y1; yy <= y2; ++yy) {
+        for (int yy = y1; yy <= y2; ++yy)
             for (int xx = x1; xx <= x2; ++xx)
                 set(xx, yy, null);
-        }
     }
 
     void set(int column, int row, Color color) {
@@ -134,21 +130,18 @@ class Screen {
         int total = 0;
         for (int i = 0; i < colors.length; ++i) {
             Color color = colors[i];
-            for (Color[] row : grid) {
-                for (Color cell : row) {
+            for (Color[] row : grid)
+                for (Color cell : row)
                     if (cell == color) {
                         score[i]++;
                         if (cell != null && cell != Color.white)
                             total++;
                     }
-                }
-            }
         }
         List<String> result = new ArrayList<>();
-        for (int i = 0; i < colors.length; ++i) {
+        for (int i = 0; i < colors.length; ++i)
             if (score[i] > 0)
                 result.add(String.format("%4.1f%% %s", 100.0 * score[i] / total, colorNames[i]));
-        }
         result.sort(Comparator.<String>reverseOrder());
         return result;
     }

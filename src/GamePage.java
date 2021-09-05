@@ -44,17 +44,15 @@ public class GamePage extends Page {
     @Override
     public void update(GameContainer gameContainer, int seconds) {
         screen.addRandomDotsOfCopiedColors();
-        if (nextScoreUpdate++ % 20 == 0) {
+        if (nextScoreUpdate++ % 20 == 0)
             score = screen.calculateScore();
-        }
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics g) throws SlickException {
         screen.paint(g);
-        if (firstPoint != null && secondPoint != null) {
+        if (firstPoint != null && secondPoint != null)
             screen.drawOutline(g, firstPoint, secondPoint);
-        }
         eraser.draw(g, squareSize);
         textPosition = placeText();
         drawTextWithShadow(g, score, squareSize * textPosition.x, squareSize * textPosition.y);
@@ -117,13 +115,13 @@ public class GamePage extends Page {
 
     @Override
     public void mouseReleased(int button, int x, int y) {
-        final Point p1 = this.firstPoint;
+        final Point p1 = firstPoint;
         if (p1 != null) {
             if (secondPoint == null)
                 secondPoint = new Point(x, y);
             else
                 secondPoint.move(x, y);
-            final Point p2 = this.secondPoint;
+            final Point p2 = secondPoint;
             final int s = squareSize;
             screen.drawFourWalls(p1.x / s, p2.x / s, p1.y / s, p2.y / s);
         }
